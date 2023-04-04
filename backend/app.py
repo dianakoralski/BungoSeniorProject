@@ -1,38 +1,20 @@
-#from cgi import test
-# commented out the following - bjk
-# from User import *
-
 import email
-from flask_cors import CORS
+#from flask_cors import CORS
 from flask import Flask
-# added these to complete the code - bjk
 from flask import request
 from flask import jsonify
 import json
 
 from turtle import update
-
-import certifi
 from User import User
-
-from geopy import geocoders
-from geopy.exc import GeocoderTimedOut
-import os
-from dotenv import load_dotenv
+#import os
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
 
 @app.route('/')
 def hello_world():
-   return 'Hello, World!'
-
-ca=certifi.where()
-
-
-load_dotenv()  # take environment variables from .env.
-GEONAMES_USER =os.environ['GEONAMES_USER']
-gn = geocoders.GeoNames(username=GEONAMES_USER, timeout=2)
+   return 'Hello, DIANA2222ç!'
 
 @app.route('/users', methods=['GET', 'POST', 'PATCH', 'DELETE'])
 def get_users():
@@ -40,12 +22,6 @@ def get_users():
         search_email = request.args.get('email')
         if search_email:
             users = User().find_by_email(search_email)
-        # search_job = request.args.get('job')
-        # if search_username and search_job:
-        #     users = User().find_by_name_and_job(search_username, search_job)
-        # elif search_job:
-        #     users = User().find_by_job(search_job)
-        # else:  # updated for db_access
         else:
             users = User().find_all()
         return {"users_list": users}
@@ -56,23 +32,10 @@ def get_users():
         # users['users_list'].append(userToAdd)
         # updated for db_access
         # make DB request to add user
-        # jira test
+        # test
 
         #TODO: Probably put all this in a function (easier for testing and reading)
         newUser = User(**userToAdd)
-
-        # need to take a look at the city, state, and country and create the location geometry coordinate object
-        location =[] 
-        #TODO: probably need to think about more complex error checking down the line here since to an external api
-        try:
-            location = gn.geocode(newUser["city"] + ", " + newUser["state"] + ", " + newUser["country"], exactly_one=False)[0][1]
-        except GeocoderTimedOut:
-            location = gn.geocode(newUser["city"] + ", " + newUser["state"] + ", " + newUser["country"], exactly_one=False)[0][1]
-        
-        coordinates = [location[1], location[0]]
-
-        newUser["location"] = { "type" : "Point", "coordinates" : coordinates}
-
         newUser.save()
         resp = jsonify(newUser), 201
         return resp
@@ -186,4 +149,5 @@ def testing():
 
 #delete_user_by_username("566 slo")
 
-Flask.run(app)
+if __name__ == "__main__":
+    Flask.run(app)

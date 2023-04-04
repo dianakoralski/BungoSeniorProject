@@ -1,3 +1,3 @@
 #.flaskenv
-FLASK_APP=Noatanga-backend.py
+FLASK_APP=app.py
 FLASK_DEBUG=1
