@@ -1,0 +1,208 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --black: #333333;
+  --white: #ffffff;
+  --orange: #e35700;
+  --gradient: linear-gradient(
+    95.77deg,
+    #ffe35b 0%,
+    #ffb14d 13.02%,
+    #ff913b 24.48%,
+    #ff8f27 32.81%,
+    #ff782d 52.6%,
+    #ff5129 77.08%,
+    #ff2525 100%
+  );
+  --gray: #8b8a8a;
+}
+
+.progress-indicator {
+  display: flex;
+  margin: 0% 10% 5% 10%;
+}
+
+.progress-step {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  flex: auto;
+  position: relative;
+}
+
+.progress-step .step-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border-radius: 50%;
+  padding: 15px;
+  height: 20px;
+  width: 20px;
+  font-size: 18px;
+  z-index: 1;
+  color: var(--gradient);
+  /* The transition-delay is set ONLY for the transform value, not the others (the additional 0.5s on transform) */
+  /* transition: transform 0.5s ease 0.5s, background 0.5s ease,
+      border-color 0.5s ease; */
+}
+
+.progress-step.incomplete .step-number {
+  background: #b0b0b0;
+  /* border: 1px solid; */
+  border-color: var(--gray);
+  color: var(--white);
+}
+
+.progress-step.active .step-number {
+  background: var(--gradient);
+  border-color: var(--orange);
+  color: var(--white);
+  transform: scale(1.2);
+}
+
+.progress-step.complete .step-number {
+  background: var(--gradient);
+  color: var(--white);
+}
+
+.progress-step h3 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  margin: 10px 0px 0px 0;
+  color: var(--gray);
+}
+
+.progress-step.active h3 {
+  color: var(--orange);
+}
+
+.progress-step.complete h3 {
+  color: var(--orange);
+}
+
+.progress-step:not(:last-child):before,
+.progress-step:not(:last-child):after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  left: 55%;
+  top: 25%;
+}
+
+.progress-step:before {
+  width: 100%;
+  background: var(--gray);
+}
+
+.progress-step.complete:after {
+  background: var(--gradient);
+  animation: progressWidth 0.5s ease forwards; /* forwards is key here to leave it at 100%. Otherwise it resets back to 0% */
+}
+
+.progress-step.incomplete:after {
+  background: var(--gradient);
+  animation: progressWidthReverse 0.5s ease forwards;
+}
+
+@keyframes progressWidth {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes progressWidthReverse {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.progress-button {
+  /* width: 20%; */
+  height: 8%;
+  background: linear-gradient(
+    95.77deg,
+    #ffe35b 0%,
+    #ffb14d 13.02%,
+    #ff913b 24.48%,
+    #ff8f27 32.81%,
+    #ff782d 52.6%,
+    #ff5129 77.08%,
+    #ff2525 100%
+  );
+  cursor: pointer;
+  border: 1px solid var(--gradient);
+  font-size: 18px;
+  padding-left: 7%;
+  padding-right: 7%;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  color: var(--white);
+  font-weight: 700;
+  margin: 0 10px;
+  border-radius: 40px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.progress-button-back {
+  /* height: 8%; */
+  /* background: whitesmoke; */
+  cursor: pointer;
+  /* border: 1px solid orange; */
+  font-size: 25px;
+  /* padding-left: 7%; */
+  padding-right: 2%;
+  /* padding-top: 18px; */
+  /* padding-bottom: 18px; */
+  color: grey;
+  font-weight: 500;
+  margin: 0 10px;
+  border-radius: 40px;
+  /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
+}
+
+.progress-button-prev {
+  background: whitesmoke;
+  cursor: pointer;
+  border: 1px solid orange;
+  font-size: 18px;
+  padding-left: 7%;
+  padding-right: 7%;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  color: grey;
+  font-weight: 500;
+  margin: 0 10px;
+  border-radius: 40px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.progress-button-skip {
+  height: 8%;
+  cursor: pointer;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: gray;
+  font-weight: 500;
+  margin: 0 10px;
+}

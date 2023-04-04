@@ -1,0 +1,112 @@
+.noatanga-label {
+  position: relative;
+  height: 5%;
+  left: 3%;
+  top: 15px;
+
+  font-family: "Nova Square";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  color: #121212;
+}
+
+.signup-label {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  padding-bottom: 20px;
+
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+
+  color: #121212;
+}
+
+.signup-form-container {
+  position: relative;
+  text-align: center;
+  min-height: 250px;
+  height: relative;
+}
+
+.createprofile-form-container {
+  position: relative;
+  align-self: center;
+  text-align: center;
+  min-height: 300px;
+  height: relative;
+  width: 100%;
+}
+
+.profile-prompt {
+  position: relative;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 33px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  color: #121212;
+}
+
+.button-options {
+  display: flex;
+  justify-content: center;
+}
+
+.continue-button {
+  position: relative;
+  display: inline;
+  height: 8%;
+  background: linear-gradient(
+    95.77deg,
+    #ffe35b 0%,
+    #ffb14d 13.02%,
+    #ff913b 24.48%,
+    #ff8f27 32.81%,
+    #ff782d 52.6%,
+    #ff5129 77.08%,
+    #ff2525 100%
+  );
+  cursor: pointer;
+  border: 1px solid var(--gradient);
+  font-size: 18px;
+  padding-left: 7%;
+  padding-right: 7%;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  color: var(--white);
+  font-weight: 700;
+  margin: 0 10px;
+  border-radius: 40px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.subtle-button {
+  position: relative;
+  display: inline;
+  height: 8%;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 18px;
+  background: linear-gradient(
+    95.77deg,
+    #ffe35b 0%,
+    #ffb14d 13.02%,
+    #ff913b 24.48%,
+    #ff8f27 32.81%,
+    #ff782d 52.6%,
+    #ff5129 77.08%,
+    #ff2525 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  margin: 0 10px;
+  border-color: transparent;
+}

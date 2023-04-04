@@ -1,0 +1,16 @@
+.Name {
+  margin-left: 29%;
+}
+
+.Name input {
+  width: 20%;
+  display: block;
+}
+
+.Name hr {
+  width: 20%;
+}
+
+.LastName {
+  margin-left: 22%;
+}

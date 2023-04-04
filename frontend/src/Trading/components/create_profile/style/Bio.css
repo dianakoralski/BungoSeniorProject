@@ -1,0 +1,44 @@
+.BioHeader {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 23px;
+  color: #121212;
+  padding-top: 0px;
+  padding-bottom: 7px;
+}
+
+.BioInfo {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-left: 12px;
+  margin-bottom: 3px;
+}
+
+.BioInfo:hover {
+  cursor: pointer;
+}
+
+.BioBar {
+  height: 1px;
+  background-color: #ff822b;
+  border: none;
+  width: 38%;
+  margin-left: 31%;
+  margin-bottom: 40px;
+}
+
+.BioText {
+  border-color: #ff822b !important;
+  border-width: 1px !important;
+  width: 30% !important;
+  height: 230px !important;
+  margin-bottom: 90px;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px !important;
+  font-weight: 400;
+  line-height: 23px !important;
+  color: #121212;
+  padding: 10px;
+}

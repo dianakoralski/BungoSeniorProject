@@ -1,0 +1,49 @@
+.heading {
+  font-size: 18px;
+}
+
+.line-hr {
+  background-color: #ff822b;
+  height: 1px;
+  margin: auto;
+  margin-bottom: 30px;
+  width: 50%;
+}
+
+.social-container {
+  width: 60%;
+  margin: auto;
+  position: relative;
+}
+
+.icon-position {
+  margin: auto;
+  font-size: 25px;
+  color: gray;
+}
+
+.social-container input {
+  height: 40px;
+  position: relative;
+  padding: 3px;
+  border-color: darkorange;
+  border-radius: 7px;
+  border-width: thin;
+  font-size: 16px;
+  width: 100%;
+  padding-left: 20px;
+}
+
+.social-container input:focus {
+  padding: 20px;
+  outline: auto;
+  outline-style: auto;
+  outline-color: rgb(234, 110, 64);
+}
+
+.social-container input::placeholder {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}

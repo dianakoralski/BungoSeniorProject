@@ -1,0 +1,15 @@
+.textBox {
+  padding-top: 150px;
+  padding-left: 100px;
+}
+
+.heading {
+  color: black;
+  font-size: 40px;
+  padding-bottom: 15px;
+}
+
+.subheading {
+  color: #787676;
+  font-size: 30px;
+}

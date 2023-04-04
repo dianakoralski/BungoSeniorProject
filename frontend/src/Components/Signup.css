@@ -1,0 +1,56 @@
+.signUpBox {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  margin-top: 150px;
+  margin-left: -300px;
+  width: 600px;
+}
+
+h1 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+p {
+  padding-top: 10px;
+  padding-bottom: 50px;
+  font-size: 13px;
+}
+
+.signupButton {
+  width: 600px;
+  height: 50px;
+  background-color: #092277;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+}
+
+.footerText {
+  padding-top: 0px;
+  padding-bottom: 50px;
+}
+
+.underlineButton {
+  text-decoration: underline;
+}
+
+.form-control {
+  color: rgb(104, 7, 60);
+  height: 25px !important;
+  width: 600px !important;
+  border-color: inherit !important;
+}
+
+.flag-dropdown {
+  background-color: #e3e8ef !important;
+}
+
+.errorMessage {
+  color: red;
+  padding: 0px;
+  margin-top: 10px;
+}
