@@ -150,4 +150,5 @@ def testing():
 #delete_user_by_username("566 slo")
 
 if __name__ == "__main__":
-    Flask.run(app)
+    #Flask.run(app)
+    app.run(host='192.168.1.118', port=5000, debug=True)
