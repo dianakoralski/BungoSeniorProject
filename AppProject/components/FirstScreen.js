@@ -19,14 +19,14 @@ function FirstScreen(props) {
         small = {false}
         label ="Login"
         theme={{colors:{accent:"green"}}}
-        onPress ={() => console.log("Pressed")}>
+        onPress ={() => props.navigation.navigate('Create')}>
       </FAB>
       <FAB
         style = {styles.fab2}
         small = {false}
         label ="Create Account"
-        theme={{colors:{accent:"green"}}}
-        onPress ={() => console.log("Pressed")}>
+        theme={{colors:"#ffffff"}}
+        onPress ={() => console.log("Pressed Create Account")}>
       </FAB>
     </View>
   )
