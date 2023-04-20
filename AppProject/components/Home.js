@@ -1,7 +1,5 @@
-
-
 import React, {useState, useEffect} from 'react';
-import {Text, View, Button, FlatList, StyleSheet} from 'react-native';
+import {Text, View, Button, FlatList, StyleSheet, Image} from 'react-native';
 import {Card, FAB} from 'react-native-paper';
 
 function Home(props) {
@@ -32,6 +30,7 @@ function Home(props) {
 
   return (
     <View style ={{flex:1}}>
+      <Image source={require('./bungotext.png')} style={{width: 300, height: 100}}/>
       <FlatList
         data ={data}
         renderItem = {({item}) => {
