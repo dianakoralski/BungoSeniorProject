@@ -1,13 +1,19 @@
 import React, {useState} from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { TextInput, Button } from 'react-native-paper'
+import { View, Text, StyleSheet, Image} from 'react-native'
+import { TextInput, Button} from 'react-native-paper'
 
 function Login() {
 
     const [title, setTitle] =useState("")
     const [body, setBody] =useState("")
   return (
-    <View>
+    <View style ={{flex:1, backgroundColor: "#191970"}}>
+      <Image source={require('./bungotext.png')} style={{width: 300, height: 100, marginTop: 100, marginLeft:30}}/>
+      <Text style = {{
+        fontSize: 18,
+        color: 'white',
+        marginLeft: 10,
+        paddingTop:60}}>Email:</Text>
       <TextInput style = {styles.inputStyle}
       label= "Email"
       value={title}
@@ -15,16 +21,26 @@ function Login() {
       theme = {{roundness:20}}
       onChangeText={text =>setTitle(text)}
       />
-
-    <TextInput style = {{margin: 10}}
+    <Text style = {{
+        fontSize: 18,
+        color: 'white',
+        marginLeft: 10,
+        paddingTop:10}}>Password:</Text>
+    <TextInput style = {styles.inputStyle}
         label= "Password"
         value={body}
         mode = 'outlined'
-        multiline
-        numberOfLines={100}
         theme = {{roundness:20}}
         onChangeText={text =>setBody(text)}
     />
+
+  <Button 
+    style= {{margin: 10, width: 200}}
+    backgroundColor ='transparent'
+    mode='text'
+    onPress={() => console.log("FORGOT PASSWORD")}>
+      FORGOT PASSWORD
+    </Button>
 
     <Button 
     style= {{margin: 10}}
@@ -39,8 +55,7 @@ function Login() {
 
 const styles =StyleSheet.create({
     inputStyle: {
-        padding: 10,
-        marginTop: 50,
+        paddingBottom: 10,
         marginRight: 10,
         marginLeft:10
     }
