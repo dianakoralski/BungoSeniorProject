@@ -1,8 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, Button, FlatList, StyleSheet, Image} from 'react-native';
+import {Text, View, Button, FlatList, StyleSheet, Image, Appearance} from 'react-native';
 import {Card, FAB} from 'react-native-paper';
 
 function FirstScreen(props) {
+
+  const renderLabel = () => (
+    <Text style={{ color: 'orange', fontSize: 18 }}>Click me!</Text>
+  );
 
     const data = [
         {id: 1, title: 'First Title', body: 'First Body'},
@@ -11,23 +15,30 @@ function FirstScreen(props) {
     ]
 
   return (
-    <View style ={{flex:1}}>
+    <View style ={{flex:1, backgroundColor: "#191970"}}>
       <Image source={require('./bungotext.png')} style={{width: 300, height: 100, marginTop: 100, marginLeft:30}}/>
-
+      <Text style={{width: 300, height: 100, marginTop: 10, marginLeft:30, color: "white", textAlign: "center", fontSize: 20}}>
+        Leading Real Estate Forward, One Open House at a Time
+      </Text>
       <FAB
         style = {styles.fab}
         small = {false}
         label ="Login"
-        theme={{colors:{accent:"green"}}}
-        onPress ={() => props.navigation.navigate('Create')}>
+        labelStyle={{ fontSize: 60 }}
+        theme={{colors:{accent:"green"}, roundness: 20}}
+        onPress ={() => props.navigation.navigate('Login')}>
       </FAB>
+      <Text style={{color: 'orange', fontSize: 20,fontWeight: 'bold',left: 240, bottom: -184}}>Get Started</Text>
+      
       <FAB
+        color ='orange'
+        backgroundColor = 'transparent'
         style = {styles.fab2}
         small = {false}
-        label ="Create Account"
-        theme={{colors:"#ffffff"}}
-        onPress ={() => console.log("Pressed Create Account")}>
+        label ="Get Started"
+        onPress ={() => props.navigation.navigate('Create Account')}>
       </FAB>
+      <Text style={{color: 'white', bottom: -160, marginLeft: 10, fontWeight: 'bold', fontSize: 20}}>Don't have an account?</Text>
     </View>
   )
 
@@ -40,23 +51,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-    Bungo: {
-      margin: 10,
-      padding: 10,
-    },
     fab:{
-        position: 'absolute',
-        width: 200,
-        margin: 16,
-        alignSelf: 'center',
-        bottom: 300
-    },
-    fab2:{
-      position: 'absolute',
+      marginTop: 10,
       width: 200,
       marginLeft: 88,
-      bottom: 250
+    },
+    fab2:{
+      flex: 1,
+      position: 'absolute',
+      width: 160,
+      marginLeft: 88,
+      fontSize: 30,
+      fontWeight: 'bold',
+      right: 0,
+      bottom: 10,
+      backgroundColor: 'transparent', //make transparent later
+      //includeFontPadding: false
   }
+
+  
   });
 
 export default FirstScreen

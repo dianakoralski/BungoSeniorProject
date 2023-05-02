@@ -2,33 +2,37 @@ import React, {useState} from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 
-function Create() {
+function Login() {
 
     const [title, setTitle] =useState("")
     const [body, setBody] =useState("")
   return (
     <View>
       <TextInput style = {styles.inputStyle}
-      label= "Title"
+      label= "Email"
       value={title}
       mode = 'outlined'
+      theme = {{roundness:20}}
       onChangeText={text =>setTitle(text)}
       />
 
     <TextInput style = {{margin: 10}}
-        label= "Description"
+        label= "Password"
         value={body}
         mode = 'outlined'
         multiline
         numberOfLines={100}
+        theme = {{roundness:20}}
         onChangeText={text =>setBody(text)}
     />
 
     <Button 
     style= {{margin: 10}}
-    icon= "pencil"
+    icon= "login"
     mode='contained'
-    onPress={() => console.log("Create pressed")}>Insert Article</Button>
+    onPress={() => console.log("Create pressed")}>
+      Log In
+    </Button>
     </View>
   )
 }
@@ -42,4 +46,4 @@ const styles =StyleSheet.create({
     }
 })
 
-export default Create
+export default Login
