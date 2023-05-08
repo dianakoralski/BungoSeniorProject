@@ -16,7 +16,7 @@ function App() {
   return (
     <View style={{ flex: 1 }}>
       <Stack.Navigator
-        screenOptions = {{headerShown: true}}> 
+        screenOptions = {{headerShown: false}}> 
       <Stack.Screen name="First" component={FirstScreen}/>
         <Stack.Screen name="Home" options={{title: 'Welcome'}} component={Home}/>
         <Stack.Screen name="Login" component={Login}/>

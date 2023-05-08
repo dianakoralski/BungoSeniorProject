@@ -2,9 +2,12 @@ import React, {useState} from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { TextInput, Button, FAB } from 'react-native-paper'
 import Contants from 'expo-constants';
+import { useNavigation } from '@react-navigation/native';
+import BackButton from './BackButton.js';
 
 function NewAccount() {
 
+  const navigation = useNavigation();
     const [name, setName] =useState("")
     const [email, setEmail] =useState("")
     const [password, setPassword] =useState("")
@@ -12,7 +15,9 @@ function NewAccount() {
 
   return (
     <View style ={{flex:1, backgroundColor: "#191970"}}>
-      <Image source={require('./bungotext.png')} style={{marginTop: Contants.statusBarHeight, width: 150, height: 50, marginLeft: 105}}/>
+      <View style={{ flex:1, alignItems: 'left', margin: 5, borderRadius: 0}}>
+      <BackButton onPress={() => navigation.goBack()} />
+      <Image source={require('./bungotext.png')} style={{marginTop: -25, width: 150, height: 50, marginLeft: 105}}/>
       <Text style ={{marginLeft: 80, fontSize: 30, color: 'white', fontWeight: 'bold'}}>Getting Started</Text>
     
 
@@ -70,6 +75,7 @@ function NewAccount() {
     onPress={() => console.log("Create pressed")}>
       CREATE MY ACCOUNT
     </Button>
+    </View>
     </View>
   )
 }

@@ -13,6 +13,8 @@ function Home(props) {
         .then(article => {setData(article)})
     }, [])
 */
+
+
     const data = [
         {id: 1, title: 'First Title', body: 'First Body'},
         {id: 2, title: 'Second Title', body: 'Second Body'},
