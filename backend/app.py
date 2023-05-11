@@ -69,9 +69,6 @@ def filter_providers():
         city = request.args.get('city', default=None)
         state = request.args.get('state', default=None)
         country = request.args.get('country', default=None)
-        services = request.args.get('services', default=None)
-        coordinates = request.args.get('coordinates', default=None)
-        radius = request.args.get('radius', default=None)
         gender = request.args.get('gender', default=None)
         users = User().filter_users(city, state, country, services, coordinates, radius, gender)
         return users
@@ -82,6 +79,13 @@ def testing():
     if request.method == 'GET':
         email_user = User().filter_users("San Luis Obispo", "California", "USA", None, [-120, 36], 5000000, None)
         return email_user
+
+@app.route('/add', methods=['GET'])
+def add_user():
+    posts = []
+    for post in User().find_all():
+        posts.append(post)
+    return jsonify(posts)
 
 # datalist = [{
 #             "username" : "firstuser",

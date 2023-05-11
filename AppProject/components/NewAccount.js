@@ -1,59 +1,46 @@
 import React, {useState} from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import {ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { TextInput, Button, FAB } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native';
 import BackButton from './BackButton.js';
-import {launchImageLibrary} from 'react-native-image-picker'
+import PasswordChecker from './PasswordChecker.js'
+import axios from 'axios';
 
-
-
-
-function NewAccount() {
+function NewAccount(props) {
 
   const navigation = useNavigation();
 
   const [image, setImage] = useState(null);
 
-  const handleSelectImage = () => {
-    ImagePicker.launchImageLibrary(
-      {
-        mediaType: 'photo',
-        includeBase64: false,
-        maxHeight: 300,
-        maxWidth: 300,
-      },
-      (response) => {
-        if (response.didCancel) {
-          console.log('User cancelled image picker');
-        } else if (response.error) {
-          console.log('ImagePicker Error: ', response.error);
-        } else {
-          setImage({ uri: response.uri });
-        }
-      },
-    );
-  };
-  
     const [name, setName] =useState("")
     const [email, setEmail] =useState("")
     const [password, setPassword] =useState("")
     const [breLicense, setBreLicense] =useState("")
 
+    const insertData = () => {
+      fetch('http://192.168.1.118:5000/users',
+          {method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name: name, email:email, password: password, breLicense:breLicense})
+      .then(resp => resp.json())
+      .then(data => {props.navigation.navigate('Home')})
+    })
+    .catch(console.log(error))
+    }
+
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const response = await axios.post('/add', { name: name, emai: email, password:password, breLicense:breLicense});
+      console.log(response.data);
+    }
+
   return (
+    <ScrollView>
     <View style ={{flex:1, backgroundColor: "#191970"}}>
       <View style={{ flex:1, alignItems: 'left', margin: 5, borderRadius: 0}}>
       <BackButton onPress={() => navigation.goBack()} />
       <Image source={require('./bungotext.png')} style={{marginTop: -25, width: 150, height: 50, marginLeft: 105}}/>
       <Text style ={{marginLeft: 80, fontSize: 30, color: 'white', fontWeight: 'bold'}}>Getting Started</Text>
-
-      <View>
-      {image ? (
-        <Image source={image} style={{ width: 200, height: 200 }} />
-      ) : (
-        <Text>No image selected</Text>
-      )}
-      <Button fontSize={45} title="Select image" onPress={handleSelectImage} />
-    </View>
 
 
       <Button 
@@ -82,15 +69,8 @@ function NewAccount() {
       theme = {{roundness:20}}
       onChangeText={text =>setEmail(text)}
       />
-
-    <Text style = {styles.txtStyle}>Password:</Text>
-    <TextInput style = {styles.inputStyle}
-      label= "Type Here"
-      value={password}
-      mode = 'outlined'
-      theme = {{roundness:20}}
-      onChangeText={text =>setPassword(text)}
-      />
+    
+      <PasswordChecker/>
 
     <Text style = {styles.txtStyle}>BRE License:</Text>
     <TextInput style = {styles.inputStyle}
@@ -107,11 +87,12 @@ function NewAccount() {
     <Button 
     style= {{margin: 10}}
     mode='contained'
-    onPress={() => console.log("Create pressed")}>
+    onPress={() => handleSubmit()}>
       CREATE MY ACCOUNT
     </Button>
     </View>
     </View>
+    </ScrollView>
   )
 }
 
