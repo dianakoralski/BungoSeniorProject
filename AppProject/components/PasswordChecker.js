@@ -3,7 +3,7 @@ import { View, Text, StyleSheet} from 'react-native';
 import {TextInput} from 'react-native-paper';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-const PasswordChecker = () => {
+const PasswordChecker = (props) => {
   const [password, setPassword] = useState('');
 
   const hasLowerCase = /[a-z]/.test(password);
@@ -22,7 +22,10 @@ const PasswordChecker = () => {
       mode = 'outlined'
       theme = {{roundness:20}}
       secureTextEntry
-      onChangeText={(text) => setPassword(text)}
+      onChangeText={(text) => {
+            setPassword(text);
+            props.setPasswordCallback(text);
+        }}
       />
       {password.length > 0 && (
         <View style= {{flex:0}}>

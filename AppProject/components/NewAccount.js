@@ -4,6 +4,7 @@ import { TextInput, Button, FAB } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native';
 import BackButton from './BackButton.js';
 import PasswordChecker from './PasswordChecker.js'
+import password from './PasswordChecker.js'
 import axios from 'axios';
 
 function NewAccount(props) {
@@ -14,23 +15,23 @@ function NewAccount(props) {
 
     const [name, setName] =useState("")
     const [email, setEmail] =useState("")
-    const [password, setPassword] =useState("")
+    const [password, setPassword] = useState('')
     const [breLicense, setBreLicense] =useState("")
 
-    const insertData = () => {
-      fetch('http://192.168.1.118:5000/users',
-          {method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({name: name, email:email, password: password, breLicense:breLicense})
-      .then(resp => resp.json())
-      .then(data => {props.navigation.navigate('Home')})
-    })
-    .catch(console.log(error))
-    }
+    // const insertData = () => {
+    //   fetch('http://127.0.0.1:5000/users',
+    //       {method: 'PUT',
+    //       headers: {'Content-Type': 'application/json'},
+    //     body: JSON.stringify({name: name, email:email, password: password, breLicense:breLicense})
+    //   .then(resp => resp.json())
+    //   .then(data => {props.navigation.navigate('Home')})
+    // })
+    // .catch(console.log(error))
+    // }
 
     const handleSubmit = async (event) => {
-      event.preventDefault();
-      const response = await axios.post('/add', { name: name, emai: email, password:password, breLicense:breLicense});
+      
+      const response = await axios.put('http://127.0.0.1:5000/users', { name: name, email: email, password: password, breLicense: breLicense});
       console.log(response.data);
     }
 
@@ -51,7 +52,7 @@ function NewAccount(props) {
     onPress={console.log("PP")}>
     </Button>
 
-      <Text style = {styles.txtStyle}>First and Last Name:</Text>
+      <Text style = {styles.txtStyle}>Full Name:</Text>
       <TextInput style = {styles.inputStyle}
       label= "Type Here"
       small={true}
@@ -70,7 +71,7 @@ function NewAccount(props) {
       onChangeText={text =>setEmail(text)}
       />
     
-      <PasswordChecker/>
+      <PasswordChecker setPasswordCallback = {setPassword}/>
 
     <Text style = {styles.txtStyle}>BRE License:</Text>
     <TextInput style = {styles.inputStyle}

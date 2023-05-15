@@ -16,7 +16,7 @@ app = Flask(__name__)
 def hello_world():
    return 'Hello, DIANA2222ç!'
 
-@app.route('/users', methods=['GET', 'POST', 'PATCH', 'DELETE'])
+@app.route('/users', methods=['GET', 'PUT', 'PATCH', 'DELETE'])
 def get_users():
     if request.method == 'GET':
         search_email = request.args.get('email')
@@ -24,8 +24,8 @@ def get_users():
             users = User().find_by_email(search_email)
         else:
             users = User().find_all()
-        return {"users_list": users}
-    elif request.method == 'POST' or request.method == 'PATCH':
+        return {"realtors": users}
+    elif request.method == 'PUT' or request.method == 'PATCH':
         # This is the sign up functionality, making a new user based on incoming json
         userToAdd = request.get_json()
         # userToAdd['id'] = gen_random_id() # check for duplicate before appending.. todo

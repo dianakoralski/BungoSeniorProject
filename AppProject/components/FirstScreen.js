@@ -28,7 +28,6 @@ function FirstScreen(props) {
         theme={{colors:{accent:"green"}, roundness: 20}}
         onPress ={() => props.navigation.navigate('Login')}>
       </FAB>
-      <Text style={{color: 'orange', fontSize: 20,fontWeight: 'bold',left: 240, bottom: -184}}>Get Started</Text>
       
       <FAB
         color ='orange'
@@ -38,7 +37,7 @@ function FirstScreen(props) {
         label ="Get Started"
         onPress ={() => props.navigation.navigate('Create Account')}>
       </FAB>
-      <Text style={{color: 'white', bottom: -160, marginLeft: 10, fontWeight: 'bold', fontSize: 20}}>Don't have an account?</Text>
+      <Text style={{color: 'white', bottom: -240, marginLeft: 10, fontWeight: 'bold', fontSize: 20}}>Don't have an account?</Text>
     </View>
   )
 
@@ -61,8 +60,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       width: 160,
       marginLeft: 88,
-      fontSize: 30,
-      fontWeight: 'bold',
+
       right: 0,
       bottom: 10,
       backgroundColor: 'transparent', //make transparent later
