@@ -13,6 +13,7 @@ function NewAccount(props) {
 
   const [image, setImage] = useState(null);
 
+    const [errorMessage, setErrorMessage] = useState("")
     const [name, setName] =useState("")
     const [email, setEmail] =useState("")
     const [password, setPassword] = useState('')
@@ -30,9 +31,17 @@ function NewAccount(props) {
     // }
 
     const handleSubmit = async (event) => {
-      
-      const response = await axios.put('http://127.0.0.1:5000/users', { name: name, email: email, password: password, breLicense: breLicense});
-      console.log(response.data);
+      try {
+        const response = await axios.put('http://127.0.0.1:5000/users', { name: name, email: email, password: password, breLicense: breLicense});
+        console.log(response.data);
+        setErrorMessage("");
+        props.navigation.navigate('Home');
+      }
+      catch (error) {
+        console.log(error.response.status);
+        console.log(error.response.data);
+        setErrorMessage(error.response.data["error"])
+      }
     }
 
   return (
@@ -45,13 +54,14 @@ function NewAccount(props) {
 
 
       <Button 
-    style={styles.roundButton1}
-    title="Choose Photo" 
-    icon= "plus"
-    mode='contained'
-    onPress={console.log("PP")}>
+        style={styles.roundButton1}
+        title="Choose Photo" 
+        icon= "plus"
+        mode='contained'
+        onClick={() => console.log("mm")}>
     </Button>
 
+      <Text style = {styles.txtStyle}>{errorMessage}</Text>
       <Text style = {styles.txtStyle}>Full Name:</Text>
       <TextInput style = {styles.inputStyle}
       label= "Type Here"

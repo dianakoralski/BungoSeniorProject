@@ -28,6 +28,10 @@ def get_users():
     elif request.method == 'PUT' or request.method == 'PATCH':
         # This is the sign up functionality, making a new user based on incoming json
         userToAdd = request.get_json()
+        if check_email_exists(userToAdd["email"]):
+            return jsonify({"error": "User with this email exists"}), 400
+
+
         # userToAdd['id'] = gen_random_id() # check for duplicate before appending.. todo
         # users['users_list'].append(userToAdd)
         # updated for db_access
@@ -131,14 +135,16 @@ def add_user():
 
 # #add_user(new_user)
 
-# #check for existing email
-# def check_email(user_email):
-#     for x in collection.find({"email": user_email}):
-#         print(x.get("email"))
-#         if x.get("email") == user_email:
-#             print("email is already registered")
-#             return
-#     print("welcome!")
+ #check for existing email
+def check_email_exists(user_email):
+    for x in User.collection.find({"email": user_email}):
+        print(x.get("email"))
+        if x.get("email") == user_email:
+            print("email is already registered")
+            return True
+    print("check email is done")
+    return False
+
 
 # check_email("user4@gmail.com")
 
