@@ -64,7 +64,7 @@ function NewAccount(props) {
       <Text style = {styles.txtStyle}>{errorMessage}</Text>
       <Text style = {styles.txtStyle}>Full Name:</Text>
       <TextInput style = {styles.inputStyle}
-      label= "Type Here"
+      placeholder= "Type Here"
       small={true}
       value={name}
       mode = 'outlined'
@@ -74,7 +74,7 @@ function NewAccount(props) {
 
     <Text style = {styles.txtStyle}>Email:</Text>
     <TextInput style = {styles.inputStyle}
-      label= "Type Here"
+      placeholder= "Type Here"
       value={email}
       mode = 'outlined'
       theme = {{roundness:20}}
@@ -85,7 +85,7 @@ function NewAccount(props) {
 
     <Text style = {styles.txtStyle}>BRE License:</Text>
     <TextInput style = {styles.inputStyle}
-      label= "Type Here"
+      placeholder= "Type Here"
       value={breLicense}
       mode = 'outlined'
       theme = {{roundness:20}}

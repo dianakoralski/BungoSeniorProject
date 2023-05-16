@@ -7,8 +7,22 @@ import BackButton from './BackButton.js';
 function Login() {
   const navigation = useNavigation();
 
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (event) => {
+    try {
+      const response = await axios.get('http://127.0.0.1:5000/users', {email: email, password: password});
+      console.log(response.data);
+      setErrorMessage("");
+      props.navigation.navigate('Home');
+    }
+    catch (error) {
+      console.log(error.response.status);
+      console.log(error.response.data);
+      setErrorMessage(error.response.data["error"])
+    }
+  }
 
   return (
     <View style={{ flex: 1, backgroundColor: '#191970' }}>
@@ -19,27 +33,30 @@ function Login() {
       <Text style={{ fontSize: 18, color: 'white', marginLeft: 10, paddingTop: 40 }}>Email:</Text>
       <TextInput
         style={styles.inputStyle}
-        label="Email"
-        value={title}
+        placeholder="Email"
+        value={email}
         mode="outlined"
         theme={{ roundness: 20 }}
-        onChangeText={(text) => setTitle(text)}
+        onChangeText={(text) => setEmail(text)}
       />
       <Text style={{ fontSize: 18, color: 'white', marginLeft: 10, paddingTop: 10 }}>Password:</Text>
       <TextInput
         style={styles.inputStyle}
-        label="Password"
-        value={body}
+        placeholder="Password"
+        value={password}
         mode="outlined"
         theme={{ roundness: 20 }}
-        onChangeText={(text) => setBody(text)}
+        onChangeText={(text) => setPassword(text)}
       />
 
       <Button style={{ margin: 10, width: 200, position: 'relative', top: -10, left: -15 }} backgroundColor="transparent" mode="text" onPress={() => console.log('FORGOT PASSWORD')}>
         FORGOT PASSWORD
       </Button>
 
-      <Button style={{ margin: 10 }} icon="login" mode="contained" onPress={() => console.log('Create pressed')}>
+      <Button style={{ margin: 10 }} 
+        icon="login" 
+        mode="contained" 
+        onPress={() => handleSubmit()}>
         Log In
       </Button>
     </View>

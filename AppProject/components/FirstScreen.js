@@ -1,18 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, Button, FlatList, StyleSheet, Image, Appearance} from 'react-native';
+import {Text, View, Button, FlatList, StyleSheet, Image, Appearance, Pressable} from 'react-native';
 import {Card, FAB} from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import LinkButton from './LinkButton.js';
+import { Link } from '@react-navigation/native';
 
 function FirstScreen(props) {
-
-  const renderLabel = () => (
-    <Text style={{ color: 'orange', fontSize: 18 }}>Click me!</Text>
-  );
-
-    const data = [
-        {id: 1, title: 'First Title', body: 'First Body'},
-        {id: 2, title: 'Second Title', body: 'Second Body'},
-        {id: 3, title: 'Third Title', body: 'Third Body'}
-    ]
+  const navigation = useNavigation();
 
   return (
     <View style ={{flex:1, backgroundColor: "#191970"}}>
@@ -26,18 +20,17 @@ function FirstScreen(props) {
         label ="Login"
         labelStyle={{ fontSize: 60 }}
         theme={{colors:{accent:"green"}, roundness: 20}}
-        onPress ={() => props.navigation.navigate('Login')}>
+        onPress ={() => navigation.navigate('Login')}>
       </FAB>
       
-      <FAB
-        color ='orange'
-        backgroundColor = 'transparent'
-        style = {styles.fab2}
-        small = {false}
-        label ="Get Started"
-        onPress ={() => props.navigation.navigate('Create Account')}>
-      </FAB>
-      <Text style={{color: 'white', bottom: -240, marginLeft: 10, fontWeight: 'bold', fontSize: 20}}>Don't have an account?</Text>
+      <Pressable
+            style= {[styles.container_Tertiary]}
+            onPress ={() => navigation.navigate('Create Account')}>
+                <Text style ={[styles.text, styles.text_Tertiary]}>Get Started</Text>
+            </Pressable>
+      
+
+      <Text style={{color: 'white',bottom: 26, marginLeft: 10, fontWeight: 'bold', fontSize: 21, width: 230}}>Don't have an account?</Text>
     </View>
   )
 
@@ -65,9 +58,20 @@ const styles = StyleSheet.create({
       bottom: 10,
       backgroundColor: 'transparent', //make transparent later
       //includeFontPadding: false
+  },
+  container_Tertiary:{
+    width:120,
+    marginLeft: 250,
+    marginTop: 250
+},
+  text_Tertiary:{
+    fontWeight: 'bold',
+    alignContent:'center',
+    fontSize: 21,
+    color:'orange'
   }
 
   
   });
 
-export default FirstScreen
+export default FirstScreen;
