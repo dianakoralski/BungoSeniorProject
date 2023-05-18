@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, Button, FlatList, StyleSheet, Image} from 'react-native';
 import {Card, FAB} from 'react-native-paper';
+import Taskbar from './Taskbar';
 
 function Home(props) {
 
@@ -32,14 +33,21 @@ function Home(props) {
 
   return (
     <View style ={{flex:1}}>
-      <Image source={require('./bungotext.png')} style={{width: 300, height: 100}}/>
-      <FlatList
-        data ={data}
-        renderItem = {({item}) => {
-            return renderData(item)
-        }}
-        keyExtractor = {item => `${item.id}`}
-      />
+      <View style={styles.textBox}>
+        <Image source={require('./bungotext.png')} style={styles.logo} />
+    </View>
+
+    <Taskbar></Taskbar>
+      <View>
+        <FlatList
+          data ={data}
+          renderItem = {({item}) => {
+              return renderData(item)
+          }}
+          keyExtractor = {item => `${item.id}`}
+          numColumns={2}
+        />
+      </View>
 
       <FAB
         style = {styles.fab}
@@ -55,8 +63,12 @@ function Home(props) {
 
 const styles = StyleSheet.create({
     cardStyle: {
-      margin: 10,
-      padding: 10
+      marginTop: 10,
+      marginLeft: 10,
+      paddingTop: 10,
+      width: '45%',
+      height: '90%',
+      flexDirection: 'row'
     },
     fab:{
         position: 'absolute',
@@ -64,6 +76,20 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 0
 
+    },
+    textBox: {
+      marginTop: 20,
+      width: '100%',
+      height: '10%',
+      backgroundColor: '#191970',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    logo: {
+      height: 75,
+      width: 220,
+      alignItems: 'center',
+      justifyContent: 'center'
     }
   });
 

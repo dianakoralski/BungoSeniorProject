@@ -17,7 +17,7 @@ const PasswordChecker = (props) => {
       <TextInput
       style = {styles.inputStyle}
       color= 'white'
-      label= "Type Here"
+      placeholder= "Type Here"
       value={password}
       mode = 'outlined'
       theme = {{roundness:20}}
