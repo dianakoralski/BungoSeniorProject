@@ -18,7 +18,6 @@ function Home(props) {
 */
 
     const navigation = useNavigation();
-
     const data = [
         {id: 1, title: 'First Title', body: 'First Body'},
         {id: 2, title: 'Second Title', body: 'Second Body'},
@@ -27,10 +26,12 @@ function Home(props) {
 
     const renderData = (item) =>{
         return(
+          
             <Card style = {styles.cardStyle}>
                 <Text style = {{fontSize: 20}}>{item.title}</Text>
                 <Text>{item.body}</Text>
             </Card>
+          
         )
     }
 
@@ -42,6 +43,9 @@ function Home(props) {
 
     <Taskbar></Taskbar>
       <View>
+        <Text>Welcome back {props.route.params.email} !</Text> 
+        {/*change to name, not email */}
+
         <FlatList
           data ={data}
           renderItem = {({item}) => {

@@ -30,7 +30,7 @@ def get_users():
         userToAdd = request.get_json()
         if check_email_exists(userToAdd["email"]):
             return jsonify({"error": "User with this email exists"}), 400
-
+        
 
         # userToAdd['id'] = gen_random_id() # check for duplicate before appending.. todo
         # users['users_list'].append(userToAdd)
@@ -54,16 +54,16 @@ def get_users():
 # - be able to accept email and password and verify if there is a user that matches both
 # for actual implementation using Cognito so wouldn't be exposing password like this (just for testing)
 # @app.route('/login/<email>/<password>', methods=['GET'])
-@app.route('/login', methods=['GET'])
-def authenticate_user(email, password):
-    if request.method == 'GET':
-        email = request.args.get('email')
-        password = request.args.get('password')
+@app.route('/login', methods=['POST'])
+def authenticate_user():
+    if request.method == 'POST':
+        email = request.json['email']
+        password = request.json['password']
         email_user = User().find_by_email(email)
         if len(email_user) == 1:
             if email_user[0]["password"] == password:
                 return email_user
-    return []
+    return jsonify({"error": "Login failed"}), 400
 
 # @app.route('/filter/<city>/<state>/<country>/<services>/<coordinates>/<radius>/<gender>', methods=['GET'])
 @app.route('/filter', methods=['GET'])

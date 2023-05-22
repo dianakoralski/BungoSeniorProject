@@ -4,24 +4,26 @@ import { TextInput, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import BackButton from './BackButton.js';
 import LinkButton from './LinkButton.js';
+import axios from 'axios';
 
-function Login() {
+function Login(props) {
   const navigation = useNavigation();
 
+  const [errorMessage, setErrorMessage] = useState("")
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (event) => {
     try {
-      const response = await axios.get('http://127.0.0.1:5000/users', {email: email, password: password});
+      const response = await axios.post('http://127.0.0.1:5000/login', {email: email, password: password});
       console.log(response.data);
-      setErrorMessage("");
-      props.navigation.navigate('Home');
+      setErrorMessage("Success");
+      user = response.data[0];
+      props.navigation.navigate('Home', user);
     }
     catch (error) {
-      console.log(error.response.status);
-      console.log(error.response.data);
-      setErrorMessage(error.response.data["error"])
+      console.log(error);
+      setErrorMessage("Login failed")
     }
   }
 
@@ -31,6 +33,7 @@ function Login() {
         <BackButton onPress={() => navigation.goBack()} />
         <Image source={require('./bungotext.png')} style={{ width: 300, height: 100, marginLeft:30, marginTop:10}} />
       </View>
+      <Text style = {styles.txtStyle}>{errorMessage}</Text>
       <Text style={{ fontSize: 18, color: 'white', marginLeft: 10, paddingTop: 40 }}>Email:</Text>
       <TextInput
         style={styles.inputStyle}
