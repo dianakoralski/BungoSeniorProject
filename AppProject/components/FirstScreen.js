@@ -14,6 +14,7 @@ function FirstScreen(props) {
       <Text style={{width: 300, height: 100, marginTop: 10, marginLeft:30, color: "white", textAlign: "center", fontSize: 20}}>
         Leading Real Estate Forward, One Open House at a Time
       </Text>
+      
       <FAB
         style = {styles.fab}
         small = {false}
@@ -22,15 +23,16 @@ function FirstScreen(props) {
         theme={{colors:{accent:"green"}, roundness: 20}}
         onPress ={() => navigation.navigate('Login')}>
       </FAB>
-      
-      <Pressable
-            style= {[styles.container_Tertiary]}
-            onPress ={() => navigation.navigate('Create Account')}>
-                <Text style ={[styles.text, styles.text_Tertiary]}>Get Started</Text>
-            </Pressable>
+      <View style={{bottom:'20%'}}>
+        <LinkButton
+        text="Get Started"
+        color ='orange'
+        goTo='Create Account'
+        fontSize={21}/>
+      </View>
       
 
-      <Text style={{color: 'white',bottom: 26, marginLeft: 10, fontWeight: 'bold', fontSize: 21, width: 230}}>Don't have an account?</Text>
+      <Text style={{color: 'white',left: 5, bottom:5, fontWeight: 'bold', fontSize: 21, width: 230}}>Don't have an account?</Text>
     </View>
   )
 

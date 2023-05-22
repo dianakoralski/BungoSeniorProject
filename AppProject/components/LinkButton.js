@@ -1,28 +1,28 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
+const LinkButton = ({text, color, goTo, fontSize}) => {
+    const navigation = useNavigation();
 
-const LinkButton = ({onPress, text, color}) => {
     return (
         <Pressable
             style= {[styles.container_Tertiary]}
-            onPress ={() => navigation.navigate('Create Account')}>
-                <Text style ={[styles.text, styles.text_Tertiary]}>Get Started</Text>
+            onPress ={() => navigation.navigate(goTo)}>
+                <Text style ={[styles.text, styles.text_Tertiary,{ color: color, fontSize: fontSize}]}>{text}</Text>
             </Pressable>
     )
 }
 
 const styles= StyleSheet.create({
     container_Tertiary:{
-        width:120,
-        marginLeft: 250,
-        marginTop: 250
+        width:200,
+        top: '30.5%'
+        
     },
       text_Tertiary:{
         fontWeight: 'bold',
-        alignContent:'center',
-        fontSize: 21,
-        color:'orange'
+        alignContent:'center'
       }
 })
 
