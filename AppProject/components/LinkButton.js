@@ -16,8 +16,7 @@ const LinkButton = ({text, color, goTo, fontSize}) => {
 
 const styles= StyleSheet.create({
     container_Tertiary:{
-        width:200,
-        top: '30.5%'
+        width:200
         
     },
       text_Tertiary:{

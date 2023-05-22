@@ -10,6 +10,7 @@ function FirstScreen(props) {
 
   return (
     <View style ={{flex:1, backgroundColor: "#191970"}}>
+    <View style ={{flex:1, backgroundColor: "#191970"}}>
       <Image source={require('./bungotext.png')} style={{width: 300, height: 100, marginTop: 100, marginLeft:30}}/>
       <Text style={{width: 300, height: 100, marginTop: 10, marginLeft:30, color: "white", textAlign: "center", fontSize: 20}}>
         Leading Real Estate Forward, One Open House at a Time
@@ -23,17 +24,19 @@ function FirstScreen(props) {
         theme={{colors:{accent:"green"}, roundness: 20}}
         onPress ={() => navigation.navigate('Login')}>
       </FAB>
-      <View style={{bottom:'20%'}}>
-        <LinkButton
+   
+    </View >
+    <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', position: 'absolute', bottom: 0, left: 0, right: 0}}>
+    <Text style={{color: 'white',left: 5, bottom:0, fontWeight: 'bold', fontSize: 21, width: 230}}>Don't have an account?</Text>
+    <LinkButton
+        style = {{right: 0}}
         text="Get Started"
         color ='orange'
         goTo='Create Account'
         fontSize={21}/>
-      </View>
-      
-
-      <Text style={{color: 'white',left: 5, bottom:5, fontWeight: 'bold', fontSize: 21, width: 230}}>Don't have an account?</Text>
+        </View>
     </View>
+    
   )
 
 }

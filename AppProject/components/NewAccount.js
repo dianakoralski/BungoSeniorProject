@@ -4,7 +4,6 @@ import { TextInput, Button, FAB } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native';
 import BackButton from './BackButton.js';
 import PasswordChecker from './PasswordChecker.js'
-import password from './PasswordChecker.js'
 import axios from 'axios';
 
 function NewAccount(props) {
@@ -83,7 +82,9 @@ function NewAccount(props) {
     
       <PasswordChecker setPasswordCallback = {setPassword}/>
 
-    <Text style = {styles.txtStyle}>BRE License:</Text>
+    
+
+    <Text style = {styles.txtStyle}>DRE License Number:</Text>
     <TextInput style = {styles.inputStyle}
       placeholder= "Type Here"
       value={breLicense}
