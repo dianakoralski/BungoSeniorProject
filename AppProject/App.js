@@ -7,6 +7,7 @@ import Login from './components/Login';
 import FirstScreen from './components/FirstScreen';
 import NewAccount from './components/NewAccount';
 import Contants from 'expo-constants';
+import AccountSettings from './components/AccountSettings';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'; 
 
@@ -21,6 +22,7 @@ function App() {
         <Stack.Screen name="Home" options={{title: 'Welcome'}} component={Home}/>
         <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Create Account" component={NewAccount}/>
+        <Stack.Screen name="AccountSettings" component={AccountSettings}/>
       </Stack.Navigator>
     </View>
   );

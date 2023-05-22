@@ -1,4 +1,6 @@
+import { NavigationContainer } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {Text, View, Button, FlatList, StyleSheet, Image} from 'react-native';
 import {Card, FAB} from 'react-native-paper';
 import Taskbar from './Taskbar';
@@ -15,6 +17,7 @@ function Home(props) {
     }, [])
 */
 
+    const navigation = useNavigation();
 
     const data = [
         {id: 1, title: 'First Title', body: 'First Body'},
@@ -54,7 +57,8 @@ function Home(props) {
         small = {false}
         icon = "plus"
         theme={{colors:{accent:"green"}}}
-        onPress ={() => console.log("Pressed")}
+        // onPress ={() => console.log("Pressed")}
+        onPress = {() => navigation.navigate('AccountSettings')}
       />
     </View>
   )
