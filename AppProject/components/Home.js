@@ -2,8 +2,11 @@ import React, {useState, useEffect} from 'react';
 import {Text, View, Button, FlatList, StyleSheet, Image} from 'react-native';
 import {Card, FAB} from 'react-native-paper';
 import Taskbar from './Taskbar';
+import { useNavigation } from '@react-navigation/native';
+
 
 function Home(props) {
+  const navigation = useNavigation()
 
    // const [data1, setData]= useState([])
 /*
@@ -54,7 +57,7 @@ function Home(props) {
         small = {false}
         icon = "plus"
         theme={{colors:{accent:"green"}}}
-        onPress ={() => console.log("Pressed")}
+        onPress ={() => navigation.navigate('Login')}
       />
     </View>
   )
