@@ -6,13 +6,18 @@ import { Card, FAB } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Taskbar from './Taskbar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import ShowingButton from './ShowingButton';
+import FirstScreen from './FirstScreen';
 
 function Home(props) {
   const navigation = useNavigation();
   const data = [
-    { id: 1, title: 'First Title', body: 'First Body' },
-    { id: 2, title: 'Second Title', body: 'Second Body' },
-    { id: 3, title: 'Third Title', body: 'Third Body' }
+    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
+    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
+    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
+    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
+    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
+    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
   ];
 
   const renderData = (item) => {
@@ -31,16 +36,20 @@ function Home(props) {
       </View>
 
       <View style={{ flex: 1 }}>
-        <Text style = {{fontSize: 30}}>Welcome back {props.route.params.email}!</Text>
+        <Text style = {{fontSize: 30, textAlign: 'center'} }>Welcome back {props.route.params.email}!</Text>
         {/* change to name, not email */}
+        {/* <ShowingButton address="123 Bond St." mlsNumber="43" goTo={FirstScreen} /> */}
 
         <FlatList
           data={data}
-          renderItem={({ item }) => {
-            return renderData(item);
-          }}
+          renderItem={({ item }) => (
+            <ShowingButton
+              address={item.address}
+              mlsNumber={item.mlsNumber}
+              goTo={item.goTo}
+            />
+          )}
           keyExtractor={(item) => `${item.id}`}
-          numColumns={2}
         />
       </View>
 
