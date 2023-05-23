@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import BackButton from './BackButton.js';
 import PasswordChecker from './PasswordChecker.js'
 import CheckBox from './CheckBox.js';
+import RoundButton from './RoundButton.js';
 import axios from 'axios';
 
 function NewAccount(props) {
@@ -56,13 +57,15 @@ function NewAccount(props) {
       <Text style ={{marginLeft: 80, fontSize: 30, color: 'white', fontWeight: 'bold'}}>Getting Started</Text>
 
 
-      <Button 
+      <RoundButton></RoundButton>
+
+      {/* <Button 
         style={styles.roundButton1}
         title="Choose Photo" 
         icon= "plus"
         mode='contained'
         onClick={() => console.log("mm")}>
-    </Button>
+    </Button> */}
 
       <Text style = {styles.txtStyle}>{errorMessage}</Text>
       <Text style = {styles.txtStyle}>Full Name:</Text>

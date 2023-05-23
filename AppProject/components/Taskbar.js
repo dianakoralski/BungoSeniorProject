@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 
 const Taskbar = ({ activeItem, onItemClick }) => {
+    const navigation = useNavigation();
+
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -9,7 +14,7 @@ const Taskbar = ({ activeItem, onItemClick }) => {
           styles.item,
           activeItem === 'Home' && styles.activeItem, // Apply different styles for the active item
         ]}
-        onPress={() => onItemClick('Home')}
+        onPress={() => navigation.navigate('Login')}
       >
         <Text style={styles.itemText}>Home</Text>
       </TouchableOpacity>
@@ -19,7 +24,7 @@ const Taskbar = ({ activeItem, onItemClick }) => {
           styles.item,
           activeItem === 'About' && styles.activeItem, // Apply different styles for the active item
         ]}
-        onPress={() => onItemClick('About')}
+        onPress={() => navigation.navigate('Login')}
       >
         <Text style={styles.itemText}>About</Text>
       </TouchableOpacity>
