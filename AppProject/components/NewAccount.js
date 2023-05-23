@@ -4,6 +4,7 @@ import { TextInput, Button, FAB } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native';
 import BackButton from './BackButton.js';
 import PasswordChecker from './PasswordChecker.js'
+import CheckBox from './CheckBox.js';
 import axios from 'axios';
 
 function NewAccount(props) {
@@ -11,6 +12,9 @@ function NewAccount(props) {
   const navigation = useNavigation();
 
   const [image, setImage] = useState(null);
+
+  const [listJob, setListJob] = useState(false);
+      const [findJob, setFindJob] = useState(false);
 
     const [errorMessage, setErrorMessage] = useState("")
     const [name, setName] =useState("")
@@ -93,8 +97,17 @@ function NewAccount(props) {
       onChangeText={text =>setBreLicense(text)}
     />
   <Text style = {styles.txtStyle}>I am looking to:</Text>
-  <Text style = {styles.txtStyle}>placeholder</Text>
-  <Text style = {styles.txtStyle}>placeholder</Text>
+
+  <CheckBox
+                onPress={() => setListJob(!listJob)}
+                title="Find realtors to do showings for me"
+                isChecked={listJob}
+              />
+              <CheckBox
+                onPress={() => setFindJob(!findJob)}
+                title="Do showings for other realtors"
+                isChecked={findJob}
+              />
 
     <Button 
     style= {{margin: 10}}

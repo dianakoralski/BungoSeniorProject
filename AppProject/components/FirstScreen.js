@@ -28,6 +28,7 @@ function FirstScreen(props) {
     </View >
     <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', position: 'absolute', bottom: 0, left: 0, right: 0}}>
     <Text style={{color: 'white',left: 5, bottom:0, fontWeight: 'bold', fontSize: 21, width: 230}}>Don't have an account?</Text>
+    <Text>__</Text>
     <LinkButton
         style = {{right: 0}}
         text="Get Started"
@@ -38,7 +39,6 @@ function FirstScreen(props) {
     </View>
     
   )
-
 }
 
 const styles = StyleSheet.create({
