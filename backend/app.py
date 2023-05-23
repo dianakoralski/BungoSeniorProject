@@ -1,4 +1,5 @@
 import email
+import re
 #from flask_cors import CORS
 from flask import Flask
 from flask import request
@@ -28,8 +29,9 @@ def get_users():
     elif request.method == 'PUT' or request.method == 'PATCH':
         # This is the sign up functionality, making a new user based on incoming json
         userToAdd = request.get_json()
-        if check_email_exists(userToAdd["email"]):
-            return jsonify({"error": "User with this email exists"}), 400
+        if check_password_requirements(userToAdd["password"]):
+            return userToAdd
+        return jsonify({"error": "Invalid Password"}), 400
         
 
         # userToAdd['id'] = gen_random_id() # check for duplicate before appending.. todo
@@ -144,6 +146,37 @@ def check_email_exists(user_email):
             return True
     print("check email is done")
     return False
+
+# check if password meets requirments
+def check_password_requirements(user_password):
+    import re
+
+def password_checker(password):
+    # Check if the password has at least 8 characters
+    if len(password) < 8:
+        return False
+    # Check if the password has at least 1 lowercase letter
+    if not re.search('[a-z]', password):
+        return False
+    # Check if the password has at least 1 uppercase letter
+    if not re.search('[A-Z]', password):
+        return False
+    # Check if the password has at least 1 number
+    if not re.search('[0-9]', password):
+        return False
+    # Check if the password has at least 1 special character
+    if not re.search('[^a-zA-Z0-9]', password):
+        return False
+    # If all the conditions are satisfied, the password is valid
+    return True
+
+# Test the password checker
+password = input("Enter your password: ")
+if password_checker(password):
+    print("Valid password")
+else:
+    print("Invalid password")
+
 
 
 # check_email("user4@gmail.com")
