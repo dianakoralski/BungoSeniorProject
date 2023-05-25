@@ -21,30 +21,69 @@ function NewAccount(props) {
     const [name, setName] =useState("")
     const [email, setEmail] =useState("")
     const [password, setPassword] = useState('')
-    const [breLicense, setBreLicense] =useState("")
-
-    // const insertData = () => {
-    //   fetch('http://127.0.0.1:5000/users',
-    //       {method: 'PUT',
-    //       headers: {'Content-Type': 'application/json'},
-    //     body: JSON.stringify({name: name, email:email, password: password, breLicense:breLicense})
-    //   .then(resp => resp.json())
-    //   .then(data => {props.navigation.navigate('Home')})
-    // })
-    // .catch(console.log(error))
-    // }
+    const [license, setLicense] =useState("")
+    const [jurisdiction, setJurisdiction] = useState("")
 
     const handleSubmit = async (event) => {
+      // Using external API to validate the license exists and matches the name
+      // API documentation: https://www.arello.com/Developers.cfm
+      // Currently using limited database from free test account
+      // ----------------Sample users:----------------------------------
+      // First   MI Last       Lic.#     City       Juris. Type   Status
+      // ---------------------------------------------------------------
+      // JOHN    Q  DOE        000012345 Montgomery AL     T      A
+      // WILLIAM R  JONES      0099487   Anchorage  AK     BROKER ACTIVE
+      // MARY    V  RICHARDSON 0089487   Juneau     AK     BROKER ACTIVE
       try {
-        const response = await axios.put('http://127.0.0.1:5000/users', { name: name, email: email, password: password, breLicense: breLicense});
+        const response = await axios.post('https://www.arello.com/lvws/v2/',
+         {searchMode:'test', username: 'lvws_test', password: 'lvws_test', 
+          jurisdiction: jurisdiction, licenseNumber: license},
+         {
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+         });
         console.log(response.data);
-        setErrorMessage("");
-        props.navigation.navigate('Home');
+        setErrorMessage("Success");
+        results = response.data["results"];
+        
+        //console.log("Found records: "+ JSON.stringify(results))
+        //check if license is found
+       if (results.length != 1)
+       {
+        setErrorMessage("License not found");
+        return;
+       }
+       user = results[0];
+       //check if the input name matches the license record from database
+       if (name.toLowerCase().includes(user["firstName"].toLowerCase()) &&
+        name.toLowerCase().includes(user["lastName"].toLowerCase()))
+       {
+        console.log("Name and license valid!");
+       }
+       else
+       {
+        setErrorMessage("Name does not match license");
+        return;
+       }
       }
       catch (error) {
-        console.log(error.response.status);
-        console.log(error.response.data);
-        setErrorMessage(error.response.data["error"])
+        console.log(error);
+        setErrorMessage("License verification failed")
+      }
+
+      // Create a new user record and sends it to the backend
+      try {
+        const response = await axios.put('http://127.0.0.1:5000/users',
+         { name: name, email: email, password: password,
+           jursidiction: jurisdiction,
+           license: license});
+        console.log(response.data);
+        setErrorMessage("");
+        props.navigation.navigate('Home', {});
+      }
+      catch (error) {
+        console.log(error.response?.status);
+        console.log(error.response?.data);
+        setErrorMessage(error.response?.data["error creating new user"])
       }
     }
 
@@ -89,15 +128,22 @@ function NewAccount(props) {
     
       <PasswordChecker setPasswordCallback = {setPassword}/>
 
-    
-
-    <Text style = {styles.txtStyle}>DRE License Number:</Text>
+      <Text style = {styles.txtStyle}>Jurisdiction State:</Text>
     <TextInput style = {styles.inputStyle}
       placeholder= "Type Here"
-      value={breLicense}
+      value={jurisdiction}
       mode = 'outlined'
       theme = {{roundness:20}}
-      onChangeText={text =>setBreLicense(text)}
+      onChangeText={text =>setJurisdiction(text)}
+    />
+
+    <Text style = {styles.txtStyle}>License Number:</Text>
+    <TextInput style = {styles.inputStyle}
+      placeholder= "Type Here"
+      value={license}
+      mode = 'outlined'
+      theme = {{roundness:20}}
+      onChangeText={text =>setLicense(text)}
     />
   <Text style = {styles.txtStyle}>I am looking to:</Text>
 

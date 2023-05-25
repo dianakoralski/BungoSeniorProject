@@ -29,9 +29,8 @@ def get_users():
     elif request.method == 'PUT' or request.method == 'PATCH':
         # This is the sign up functionality, making a new user based on incoming json
         userToAdd = request.get_json()
-        if check_password_requirements(userToAdd["password"]):
-            return userToAdd
-        return jsonify({"error": "Invalid Password"}), 400
+        if not password_checker(userToAdd["password"]):
+            return jsonify({"error": "Invalid Password"}), 400
         
 
         # userToAdd['id'] = gen_random_id() # check for duplicate before appending.. todo
@@ -68,17 +67,17 @@ def authenticate_user():
     return jsonify({"error": "Login failed"}), 400
 
 # @app.route('/filter/<city>/<state>/<country>/<services>/<coordinates>/<radius>/<gender>', methods=['GET'])
-@app.route('/filter', methods=['GET'])
-def filter_providers():
-    if request.method == 'GET':
-        # TODO: figure out how we want to pass parameters
-        city = request.args.get('city', default=None)
-        state = request.args.get('state', default=None)
-        country = request.args.get('country', default=None)
-        gender = request.args.get('gender', default=None)
-        users = User().filter_users(city, state, country, services, coordinates, radius, gender)
-        return users
-    return []
+# @app.route('/filter', methods=['GET'])
+# def filter_providers():
+#     if request.method == 'GET':
+#         # TODO: figure out how we want to pass parameters
+#         city = request.args.get('city', default=None)
+#         state = request.args.get('state', default=None)
+#         country = request.args.get('country', default=None)
+#         gender = request.args.get('gender', default=None)
+#         users = User().filter_users(city, state, country, services, coordinates, radius, gender)
+#         return users
+#     return []
 
 @app.route('/test', methods=['GET'])
 def testing():
@@ -147,9 +146,6 @@ def check_email_exists(user_email):
     print("check email is done")
     return False
 
-# check if password meets requirments
-def check_password_requirements(user_password):
-    import re
 
 def password_checker(password):
     # Check if the password has at least 8 characters
@@ -171,11 +167,11 @@ def password_checker(password):
     return True
 
 # Test the password checker
-password = input("Enter your password: ")
-if password_checker(password):
-    print("Valid password")
-else:
-    print("Invalid password")
+# password = input("Enter your password: ")
+# if password_checker(password):
+#     print("Valid password")
+# else:
+#     print("Invalid password")
 
 
 

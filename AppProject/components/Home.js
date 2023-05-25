@@ -36,7 +36,7 @@ function Home(props) {
       </View>
 
       <View style={{ flex: 1 }}>
-        <Text style = {{fontSize: 30, textAlign: 'center'} }>Welcome back {props.route.params.email}!</Text>
+        {props.route.params.email?.length > 0 && <Text style = {{fontSize: 30, textAlign: 'center'} }>Welcome back {props.route.params.email}!</Text>}
         {/* change to name, not email */}
         {/* <ShowingButton address="123 Bond St." mlsNumber="43" goTo={FirstScreen} /> */}
 

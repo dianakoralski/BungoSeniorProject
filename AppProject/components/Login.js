@@ -13,7 +13,7 @@ function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async () => {
     try {
       const response = await axios.post('http://127.0.0.1:5000/login', {email: email, password: password});
       console.log(response.data);
@@ -53,11 +53,11 @@ function Login(props) {
         onChangeText={(text) => setPassword(text)}
       />
 
-      <Button style={{ margin: 10, width: 200, position: 'relative', top: -10, left: -15 }} backgroundColor="transparent" mode="text" onPress={() => console.log('FORGOT PASSWORD')}>
+      <Button style={{ margin: 10, width: 200}} backgroundColor="transparent" mode="text" onPress={() => console.log('FORGOT PASSWORD')}>
         FORGOT PASSWORD
       </Button>
 
-      <Button style={{ margin: 10 }} 
+      <Button style={{marginTop: 50 }} 
         icon="login" 
         mode="contained" 
         onPress={() => handleSubmit()}>
