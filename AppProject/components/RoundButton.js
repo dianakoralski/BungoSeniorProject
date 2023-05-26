@@ -1,34 +1,28 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
 import { AntDesign } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
+
 
 const RoundButton = () => {
   const [image, setImage] = useState(null);
 
-  const handlePress = () => {
-    ImagePicker.showImagePicker(
-      {
-        title: 'Select Profile Photo',
-        mediaType: 'photo',
-        quality: 1,
-        maxWidth: 500,
-        maxHeight: 500,
-        storageOptions: {
-          skipBackup: true,
-          path: 'images',
-        },
-      },
-      (response) => {
-        if (!response.didCancel && !response.error) {
-          setImage(response.uri);
-        }
-      }
-    );
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+  
+    if (!result.canceled) {
+        const { uri } = result.assets[0];
+      setImage(uri);
+    }
   };
 
   return (
-    <TouchableOpacity onPress={handlePress} style={styles.buttonContainer}>
+    <TouchableOpacity onPress={pickImage} style={styles.buttonContainer}>
       <View style={styles.button}>
         {image ? (
           <Image source={{ uri: image }} style={styles.image} />

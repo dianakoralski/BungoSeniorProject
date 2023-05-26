@@ -1,9 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import {Text, View, Button, FlatList, StyleSheet, Image, Appearance, Pressable} from 'react-native';
-import {Card, FAB} from 'react-native-paper';
+import {Text, View, StyleSheet, Image} from 'react-native';
+import {FAB} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import LinkButton from './LinkButton.js';
-import { Link } from '@react-navigation/native';
 
 function FirstScreen(props) {
   const navigation = useNavigation();
@@ -61,7 +59,7 @@ const styles = StyleSheet.create({
 
       right: 0,
       bottom: 10,
-      backgroundColor: 'transparent', //make transparent later
+      backgroundColor: 'transparent',
       //includeFontPadding: false
   },
   container_Tertiary:{

@@ -12,10 +12,8 @@ function NewAccount(props) {
 
   const navigation = useNavigation();
 
-  const [image, setImage] = useState(null);
-
-  const [listJob, setListJob] = useState(false);
-      const [findJob, setFindJob] = useState(false);
+    const [listJob, setListJob] = useState(false);
+    const [findJob, setFindJob] = useState(false);
 
     const [errorMessage, setErrorMessage] = useState("")
     const [name, setName] =useState("")
@@ -95,18 +93,12 @@ function NewAccount(props) {
       <Image source={require('./bungotext.png')} style={{marginTop: -25, width: 150, height: 50, marginLeft: 105}}/>
       <Text style ={{marginLeft: 80, fontSize: 30, color: 'white', fontWeight: 'bold'}}>Getting Started</Text>
 
+      <View style = {{alignSelf: 'center', marginTop: 10}}>
+        <RoundButton></RoundButton>
+        <Text style = {{color: 'white', left: 8}}>Profile Photo</Text>
+      </View>
 
-      <RoundButton></RoundButton>
-
-      {/* <Button 
-        style={styles.roundButton1}
-        title="Choose Photo" 
-        icon= "plus"
-        mode='contained'
-        onClick={() => console.log("mm")}>
-    </Button> */}
-
-      <Text style = {styles.txtStyle}>{errorMessage}</Text>
+      <Text style = {styles.errorTxt}>{errorMessage}</Text>
       <Text style = {styles.txtStyle}>Full Name:</Text>
       <TextInput style = {styles.inputStyle}
       placeholder= "Type Here"
@@ -179,6 +171,11 @@ const styles =StyleSheet.create({
     },
     txtStyle:{
       color: 'white',
+      marginLeft: 10,
+      paddingTop:10
+    },
+    errorTxt:{
+      color: 'red',
       marginLeft: 10,
       paddingTop:10
     },
