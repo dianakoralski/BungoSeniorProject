@@ -2,6 +2,9 @@ import { Link } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import LinkButton from './LinkButton';
+import BackButton from './BackButton';
+import { useNavigation } from '@react-navigation/native';
+
 
 function AccountSettings(props) {
     // const options = [
@@ -25,8 +28,14 @@ function AccountSettings(props) {
         <Text style={styles.option}>{item.label}</Text>
     );
 
+    const navigation = useNavigation()
+
     return (
+        <View style = {{flex:1}}><BackButton 
+        onPress={() => navigation.goBack()}
+        color ='black'/>
         <View style={styles.container}>
+            
             <Text style={styles.title}>
                 Account Settings
             </Text>
@@ -62,6 +71,7 @@ function AccountSettings(props) {
                 contentContainerStyle={styles.optionsContainer}
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
             />
+        </View>
         </View>
     );
 }

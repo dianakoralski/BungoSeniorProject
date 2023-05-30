@@ -40,9 +40,9 @@ const Taskbar = ({ activeItem, onItemClick }) => {
           styles.item,
           activeItem === 'About' && styles.activeItem, // Apply different styles for the active item
         ]}
-        onPress={() => navigation.navigate('ManageListings')}
+        onPress={() => navigation.navigate('Home', email = '')}
       >
-        <Text style={styles.itemText}>About</Text>
+        <Text style={styles.itemText}>Home</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.dropdownButton} onPress={handleDropdownPress}>

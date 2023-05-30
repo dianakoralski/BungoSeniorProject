@@ -12,7 +12,8 @@ function NewListing(props) {
 
     const [errorMessage, setErrorMessage] = useState("")
     const [description, setDescription] =useState("")
-    const [address, setAddress] = useState('')
+    const [address, setAddress] = useState("")
+    const [mlsNumber, setMLSNumber] =useState("")
     const [date, setDate] =useState("")
 
     // const handleSubmit = async (event) => {
@@ -38,7 +39,9 @@ function NewListing(props) {
     <View style ={{flex:1}}>
     <ScrollView>
       <View style={{ flex:1, alignItems: 'left', margin: 5, borderRadius: 0}}>
-      <BackButton onPress={() => navigation.goBack()} />
+      <BackButton 
+      onPress={() => navigation.goBack()}
+      color ='black'/>
       <Text style ={{marginLeft: 80, fontSize: 30, color: 'black', fontWeight: 'bold'}}>Add New Listing</Text>
 
       <View style = {{flex: 1, alignSelf: 'center', marginTop: 10}}>
@@ -60,6 +63,14 @@ function NewListing(props) {
       mode = 'outlined'
       multiline
       onChangeText={text =>setDescription(text)}
+      />
+
+<Text style = {styles.txtStyle}>MLS #:</Text>
+      <TextInput style = {styles.inputStyle}
+      small={true}
+      value={mlsNumber}
+      mode = 'outlined'
+      onChangeText={text =>setMLSNumber(text)}
       />
 
       <Text style = {styles.txtStyle}>Date:</Text>
