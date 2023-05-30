@@ -30,7 +30,7 @@ const Taskbar = ({ activeItem, onItemClick }) => {
           styles.item,
           activeItem === 'Home' && styles.activeItem, // Apply different styles for the active item
         ]}
-        onPress={() => navigation.navigate('Login')}
+        onPress={() => navigation.navigate('ManageListings')}
       >
         <Text style={styles.itemText}>Manage Listings</Text>
       </TouchableOpacity>
@@ -40,7 +40,7 @@ const Taskbar = ({ activeItem, onItemClick }) => {
           styles.item,
           activeItem === 'About' && styles.activeItem, // Apply different styles for the active item
         ]}
-        onPress={() => navigation.navigate('Login')}
+        onPress={() => navigation.navigate('ManageListings')}
       >
         <Text style={styles.itemText}>About</Text>
       </TouchableOpacity>

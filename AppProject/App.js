@@ -6,6 +6,8 @@ import Home from './components/Home';
 import Login from './components/Login';
 import FirstScreen from './components/FirstScreen';
 import NewAccount from './components/NewAccount';
+import ManageListings from './components/ManageListings';
+import NewListing from './components/NewListing';
 import Contants from 'expo-constants';
 import AccountSettings from './components/AccountSettings';
 import { NavigationContainer } from '@react-navigation/native';
@@ -23,6 +25,8 @@ function App() {
         <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Create Account" component={NewAccount}/>
         <Stack.Screen name="AccountSettings" component={AccountSettings}/>
+        <Stack.Screen name="ManageListings" component={ManageListings}/>
+        <Stack.Screen name="NewListing" component={NewListing}/>
       </Stack.Navigator>
     </View>
   );
