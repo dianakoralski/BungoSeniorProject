@@ -21,6 +21,7 @@ const PickPhotos = () => {
     if (!result.canceled) {
       const selectedAssets = result.assets.map((asset) => asset.uri);
       setSelectedImages([...selectedImages, ...selectedAssets]);
+      console.log(JSON.stringify(selectedImages));
     }
   };
 
