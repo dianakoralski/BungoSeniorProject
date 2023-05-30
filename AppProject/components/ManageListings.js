@@ -7,18 +7,29 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Taskbar from './Taskbar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ShowingButton from './ShowingButton';
-import FirstScreen from './FirstScreen';
+import axios from 'axios';
 
 function ManageListings(props) {
   const navigation = useNavigation();
-  const data = [
-    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-  ];
+  const [data, setData] = useState(null)
+  //var data = [
+  //  { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
+  //];
+  if (data == null)
+  {
+    try {
+        axios.get('http://127.0.0.1:5000/properties',{params: {user_id: '646b0200cd5373b9c9c47010'}})
+            .then((response)=>{
+                console.log("Response: "+ JSON.stringify(response.data.properties));
+                setData(response.data.properties);
+            });
+    }
+    catch (error) {
+        console.log(error);
+        setErrorMessage("Get user properties failed")
+    }
+  }
+  
 
   const renderData = (item) => {
     return (
@@ -43,10 +54,10 @@ function ManageListings(props) {
             <ShowingButton
               address={item.address}
               mlsNumber={item.mlsNumber}
-              goTo={item.goTo}
+              goTo='Home'
             />
           )}
-          keyExtractor={(item) => `${item.id}`}
+          keyExtractor={(item) => `${item._id}`}
         />
       </View>
 

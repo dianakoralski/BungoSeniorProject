@@ -8,6 +8,8 @@ import json
 
 from turtle import update
 from User import User
+from Property import Property
+
 #import os
 
 app = Flask(__name__)
@@ -78,6 +80,33 @@ def authenticate_user():
 #         users = User().filter_users(city, state, country, services, coordinates, radius, gender)
 #         return users
 #     return []
+
+@app.route('/properties', methods=['GET', 'PUT', 'PATCH', 'DELETE'])
+def get_properties():
+    if request.method == 'GET':
+        search_id = request.args.get('id')
+        search_user_id = request.args.get('user_id')
+        if search_id:
+            properties = Property().find_by_id(search_id)
+        elif search_user_id:
+            properties = Property().find_by_user_id(search_user_id)
+        else:
+            properties = Property().find_all()
+        return {"properties": properties}
+    elif request.method == 'PUT' or request.method == 'PATCH':
+        # Making a new property based on incoming json
+        propertyToAdd = request.get_json()
+        newProperty = Property(**propertyToAdd)
+        newProperty.save()
+        resp = jsonify(newProperty), 201
+        return resp
+    elif request.method == 'DELETE':
+        search_id = request.args.get('id')
+        if search_id:
+            property_info = Property().find_by_id(search_id)
+            property_to_delete = Property(**property_info[0])
+            return property_to_delete.remove()
+        return jsonify({"error": "Missing Property Id"}), 400
 
 @app.route('/test', methods=['GET'])
 def testing():

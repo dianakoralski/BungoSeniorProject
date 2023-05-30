@@ -7,17 +7,18 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Taskbar from './Taskbar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ShowingButton from './ShowingButton';
-import FirstScreen from './FirstScreen';
+import State from './State';
 
 function Home(props) {
+  console.log(State.getInstance().CurrentUser)
   const navigation = useNavigation();
   const data = [
     { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
+    // { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
+    // { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
+    // { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
+    // { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
+    // { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
   ];
 
   const renderData = (item) => {
@@ -36,7 +37,7 @@ function Home(props) {
       </View>
 
       <View style={{ flex: 1 }}>
-        {props.route.params.email?.length > 0 && <Text style = {{fontSize: 30, textAlign: 'center'} }>Welcome back {props.route.params.email}!</Text>}
+        {props.route.params?.email?.length > 0 && <Text style = {{fontSize: 30, textAlign: 'center'} }>Welcome back {State.getInstance().CurrentUser.email}!</Text>}
         {/* change to name, not email */}
         {/* <ShowingButton address="123 Bond St." mlsNumber="43" goTo={FirstScreen} /> */}
 

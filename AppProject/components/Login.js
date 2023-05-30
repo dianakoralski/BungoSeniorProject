@@ -5,8 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 import BackButton from './BackButton.js';
 import LinkButton from './LinkButton.js';
 import axios from 'axios';
+import State from './State.js';
 
 function Login(props) {
+  
   const navigation = useNavigation();
 
   const [errorMessage, setErrorMessage] = useState("")
@@ -19,7 +21,10 @@ function Login(props) {
       console.log(response.data);
       setErrorMessage("Success");
       user = response.data[0];
+      State.getInstance().CurrentUser = user;
+      State.getInstance().DisplayWelcomeUser = true;
       props.navigation.navigate('Home', user);
+      State.getInstance().DisplayWelcomeUser = false;
     }
     catch (error) {
       console.log(error);

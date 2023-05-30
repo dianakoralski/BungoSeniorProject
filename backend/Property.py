@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 import certifi
 
-class User(Model):
+class Property(Model):
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
@@ -31,12 +31,16 @@ class User(Model):
         print(f'properties:  {properties}')
         return make_id_strings(properties)
 
-    # def find_by_email(self, email):
-    #     users = list(self.collection.find({"email": email}))
-    #     return make_id_strings(users)
+    def find_by_id(self, prop_id):
+        properties = list(self.collection.find({"_id": prop_id}))
+        return make_id_strings(properties)
+    
+    def find_by_user_id(self, user_id):
+        properties = list(self.collection.find({"user_id": user_id}))
+        return make_id_strings(properties)
 
 # helper which turns the object ids into strings for readability
 def make_id_strings(properties):
     for property in properties:
-            properties["_id"] = str(properties["_id"])
+            property["_id"] = str(property["_id"])
     return properties

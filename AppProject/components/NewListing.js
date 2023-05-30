@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import BackButton from './BackButton.js';
 import PickPhotos from './PickPhotos.js';
 import axios from 'axios';
+import State from './State.js'
 
 function NewListing(props) {
 
@@ -16,24 +17,24 @@ function NewListing(props) {
     const [mlsNumber, setMLSNumber] =useState("")
     const [date, setDate] =useState("")
 
-    // const handleSubmit = async (event) => {
+    const handleSubmit = async (event) => {
 
-    //   // Create a new user record and sends it to the backend
-    //   try {
-    //     const response = await axios.put('http://127.0.0.1:5000/users',
-    //      { name: name, email: email, password: password,
-    //        jursidiction: jurisdiction,
-    //        license: license});
-    //     console.log(response.data);
-    //     setErrorMessage("");
-    //     props.navigation.navigate('Home', {});
-    //   }
-    //   catch (error) {
-    //     console.log(error.response?.status);
-    //     console.log(error.response?.data);
-    //     setErrorMessage(error.response?.data["error creating new user"])
-    //   }
-    // }
+      // Create a new property record and sends it to the backend
+      try {
+        const response = await axios.put('http://127.0.0.1:5000/properties',
+         { user_id: State.getInstance().CurrentUser['_id'],
+            address: address, description: description, mlsNumber: mlsNumber,
+           date: date});
+        console.log(response.data);
+        setErrorMessage("");
+        props.navigation.navigate('ManageListings');
+      }
+      catch (error) {
+        console.log(error.response?.status);
+        console.log(error.response?.data);
+        setErrorMessage(error.response?.data["error creating new property"])
+      }
+    }
 
   return (
     <View style ={{flex:1}}>
