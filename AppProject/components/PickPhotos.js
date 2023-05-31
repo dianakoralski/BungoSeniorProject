@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Button, Image, FlatList, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
-const PickPhotos = () => {
+const PickPhotos = ({change}) => {
   const [selectedImages, setSelectedImages] = useState([]);
 
   const handleImageSelection = async () => {
@@ -16,12 +16,14 @@ const PickPhotos = () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsMultipleSelection: true,
+      base64: true,
     });
 
     if (!result.canceled) {
-      const selectedAssets = result.assets.map((asset) => asset.uri);
-      setSelectedImages([...selectedImages, ...selectedAssets]);
-      console.log(JSON.stringify(selectedImages));
+      const selectedAssets = result.assets.map((asset) => asset.base64);
+      newSelectedImages = [...selectedImages, ...selectedAssets];
+      setSelectedImages(newSelectedImages);
+      change(newSelectedImages);
     }
   };
 
@@ -29,7 +31,7 @@ const PickPhotos = () => {
     return (
       <FlatList
         data={selectedImages}
-        renderItem={({ item }) => <Image source={{ uri: item }} style={styles.image} />}
+        renderItem={({ item }) => <Image source={{ uri: 'data:image/jpeg;base64,' + item }} style={styles.image} />}
         keyExtractor={(item, index) => index.toString()}
         horizontal
       />

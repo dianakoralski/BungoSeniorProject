@@ -8,6 +8,7 @@ import Taskbar from './Taskbar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ShowingButton from './ShowingButton';
 import axios from 'axios';
+import State from './State.js'
 
 function ManageListings(props) {
   const navigation = useNavigation();
@@ -18,9 +19,9 @@ function ManageListings(props) {
   if (data == null)
   {
     try {
-        axios.get('http://127.0.0.1:5000/properties',{params: {user_id: '646b0200cd5373b9c9c47010'}})
+        axios.get('http://127.0.0.1:5000/properties',{params: {user_id: State.getInstance().CurrentUser['_id']}})
             .then((response)=>{
-                console.log("Response: "+ JSON.stringify(response.data.properties));
+               // console.log("Response: "+ JSON.stringify(response.data.properties));
                 setData(response.data.properties);
             });
     }

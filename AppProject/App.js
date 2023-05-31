@@ -8,6 +8,7 @@ import FirstScreen from './components/FirstScreen';
 import NewAccount from './components/NewAccount';
 import ManageListings from './components/ManageListings';
 import NewListing from './components/NewListing';
+import PropertyDetails from './components/PropertyDetails';
 import Contants from 'expo-constants';
 import AccountSettings from './components/AccountSettings';
 import { NavigationContainer } from '@react-navigation/native';
@@ -23,15 +24,15 @@ class App extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Stack.Navigator
-          screenOptions = {{headerShown: false}}> 
-        <Stack.Screen name="First" component={FirstScreen}/>
+        <Stack.Navigator screenOptions = {{headerShown: false}}> 
+          <Stack.Screen name="First" component={FirstScreen}/>
           <Stack.Screen name="Home" options={{title: 'Welcome'}} component={Home}/>
           <Stack.Screen name="Login" component={Login}/>
           <Stack.Screen name="Create Account" component={NewAccount}/>
           <Stack.Screen name="AccountSettings" component={AccountSettings}/>
           <Stack.Screen name="ManageListings" component={ManageListings}/>
           <Stack.Screen name="NewListing" component={NewListing}/>
+          <Stack.Screen name="PropertyDetails" component={PropertyDetails}/>
         </Stack.Navigator>
       </View>
     );

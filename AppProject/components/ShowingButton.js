@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const ShowingButton = ({ address, mlsNumber, goTo }) => {
+const ShowingButton = ({ address, mlsNumber, goTo, image }) => {
     const navigation = useNavigation();
 
     return (
@@ -11,7 +11,7 @@ const ShowingButton = ({ address, mlsNumber, goTo }) => {
             onPress={() => navigation.navigate(goTo)}
         >
             <Image
-                source={require('../assets/house-2492054_1280.png')}
+                source={{ uri: 'data:image/jpeg;base64,' + image}}
                 style={styles.image}
             />
             <View style={styles.infoContainer}>

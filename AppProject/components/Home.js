@@ -8,18 +8,31 @@ import Taskbar from './Taskbar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ShowingButton from './ShowingButton';
 import State from './State';
+import axios from 'axios';
 
 function Home(props) {
   console.log(State.getInstance().CurrentUser)
   const navigation = useNavigation();
-  const data = [
-    { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    // { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    // { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    // { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    // { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-    // { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-  ];
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const [data, setData] = useState(null);
+  console.log("Data is " + JSON.stringify(data));
+  if (data == null)
+  {
+    console.log("Data is null");
+    try {
+        axios.get('http://127.0.0.1:5000/properties', {})
+            .then((response)=>{
+                //console.log("Response: "+ JSON.stringify(response.data.properties));
+                setData(response.data.properties);
+            });
+    }
+    catch (error) {
+        console.log(JSON.stringify(error));
+        setErrorMessage("Get user properties failed");
+        setData([]);
+    }
+  }
 
   const renderData = (item) => {
     return (
@@ -47,7 +60,8 @@ function Home(props) {
             <ShowingButton
               address={item.address}
               mlsNumber={item.mlsNumber}
-              goTo={item.goTo}
+              image = {item.images?.find(x => true)}
+              goTo='PropertyDetails'
             />
           )}
           keyExtractor={(item) => `${item.id}`}

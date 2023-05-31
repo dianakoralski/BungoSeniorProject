@@ -16,6 +16,10 @@ function NewListing(props) {
     const [address, setAddress] = useState("")
     const [mlsNumber, setMLSNumber] =useState("")
     const [date, setDate] =useState("")
+    const [selectedImages, setSelectedImages] = useState([]);
+    function handleState(newValue) {
+        setSelectedImages(newValue);
+    }
 
     const handleSubmit = async (event) => {
 
@@ -24,12 +28,13 @@ function NewListing(props) {
         const response = await axios.put('http://127.0.0.1:5000/properties',
          { user_id: State.getInstance().CurrentUser['_id'],
             address: address, description: description, mlsNumber: mlsNumber,
-           date: date});
-        console.log(response.data);
+           date: date, images: selectedImages});
+        // console.log(response.data);
         setErrorMessage("");
         props.navigation.navigate('ManageListings');
       }
       catch (error) {
+        console.log(JSON.stringify(error));
         console.log(error.response?.status);
         console.log(error.response?.data);
         setErrorMessage(error.response?.data["error creating new property"])
@@ -46,7 +51,7 @@ function NewListing(props) {
       <Text style ={{marginLeft: 80, fontSize: 30, color: 'black', fontWeight: 'bold'}}>Add New Listing</Text>
 
       <View style = {{flex: 1, alignSelf: 'center', marginTop: 10}}>
-        <PickPhotos></PickPhotos>
+        <PickPhotos change={handleState}></PickPhotos>
       </View>
 
       <Text style = {styles.errorTxt}>{errorMessage}</Text>
