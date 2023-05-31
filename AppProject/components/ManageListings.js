@@ -13,6 +13,7 @@ import State from './State.js'
 function ManageListings(props) {
   const navigation = useNavigation();
   const [data, setData] = useState(null)
+  const [errorMessage, setErrorMessage] =("")
   //var data = [
   //  { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
   //];

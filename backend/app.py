@@ -33,13 +33,6 @@ def get_users():
         userToAdd = request.get_json()
         if not password_checker(userToAdd["password"]):
             return jsonify({"error": "Invalid Password"}), 400
-        
-
-        # userToAdd['id'] = gen_random_id() # check for duplicate before appending.. todo
-        # users['users_list'].append(userToAdd)
-        # updated for db_access
-        # make DB request to add user
-        # test
 
         #TODO: Probably put all this in a function (easier for testing and reading)
         newUser = User(**userToAdd)
@@ -76,7 +69,6 @@ def authenticate_user():
 #         city = request.args.get('city', default=None)
 #         state = request.args.get('state', default=None)
 #         country = request.args.get('country', default=None)
-#         gender = request.args.get('gender', default=None)
 #         users = User().filter_users(city, state, country, services, coordinates, radius, gender)
 #         return users
 #     return []
@@ -121,50 +113,6 @@ def add_user():
         posts.append(post)
     return jsonify(posts)
 
-# datalist = [{
-#             "username" : "firstuser",
-#             "email" : "user1@gmail.com",
-#             "password" : "GhostHunter17",
-#             "name": "tim", 
-#             "address": "101 slo",
-#             "Current Location" : "GPS",
-#             "Phone Number" : "805-765-2212",
-#             "Profile Picture" : "URL",
-#             "Last Active" : "15 minutes ago"}, 
-            
-#             {
-#             "username" : "seconduser",
-#             "email" : "user2@gmail.com",
-#             "password" : "Casper145!",
-#             "name": "Penelope", 
-#             "address": "232 slo",
-#             "Current Location" : "GPS",
-#             "Phone Number" : "805-123-4567",
-#             "Profile Picture" : "URL",
-#             "Last Active" : "2 days ago"}]
-
-# #add intial users
-# #collection.insert_many(datalist)
-
-# def add_user(user: User):
-#     collection.insert_one(vars(user))
-
-# new_user = User(
-#             "newuser",
-#             "user3@gmail.com",
-#             "Pass123",
-#             "Credit Card",
-#             "Sam", 
-#             "566 slo",
-#             "GPS",
-#             "805-432-1000",
-#             "URL",
-#             "4 days ago",
-#             "Welcome!"
-#             )
-
-# #add_user(new_user)
-
  #check for existing email
 def check_email_exists(user_email):
     for x in User.collection.find({"email": user_email}):
@@ -174,7 +122,6 @@ def check_email_exists(user_email):
             return True
     print("check email is done")
     return False
-
 
 def password_checker(password):
     # Check if the password has at least 8 characters
