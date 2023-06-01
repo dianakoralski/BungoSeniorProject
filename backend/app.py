@@ -76,7 +76,7 @@ def authenticate_user():
 @app.route('/properties', methods=['GET', 'PUT', 'PATCH', 'DELETE'])
 def get_properties():
     if request.method == 'GET':
-        search_id = request.args.get('id')
+        search_id = request.args.get('_id')
         search_user_id = request.args.get('user_id')
         if search_id:
             properties = Property().find_by_id(search_id)

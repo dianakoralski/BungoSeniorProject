@@ -2,6 +2,7 @@
 export default class State {
     static instance = null;
     CurrentUser = "Not set";
+    CurrentProperty = "Not Set"
     DisplayWelcomeUser = false;
 
     static getInstance() {

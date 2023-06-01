@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Modal, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const Taskbar = ({ activeItem, onItemClick }) => {
+const Taskbar = ({ activeItem, onItemClick, onRefresh }) => {
   const navigation = useNavigation();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
@@ -40,7 +40,8 @@ const Taskbar = ({ activeItem, onItemClick }) => {
           styles.item,
           activeItem === 'About' && styles.activeItem, // Apply different styles for the active item
         ]}
-        onPress={() => navigation.navigate('Home', email = '')}
+        onPress={() => navigation.navigate('Home', {email: ''})         
+        }
       >
         <Text style={styles.itemText}>Home</Text>
       </TouchableOpacity>

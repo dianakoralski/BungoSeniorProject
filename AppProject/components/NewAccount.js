@@ -6,6 +6,7 @@ import BackButton from './BackButton.js';
 import PasswordChecker from './PasswordChecker.js'
 import CheckBox from './CheckBox.js';
 import RoundButton from './RoundButton.js';
+import State from './State.js';
 import axios from 'axios';
 
 function NewAccount(props) {
@@ -76,6 +77,8 @@ function NewAccount(props) {
            license: license});
         console.log(response.data);
         setErrorMessage("");
+        user = response.data
+        State.getInstance().CurrentUser = user;
         props.navigation.navigate('Home', {});
       }
       catch (error) {

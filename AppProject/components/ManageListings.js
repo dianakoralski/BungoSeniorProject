@@ -10,7 +10,10 @@ import ShowingButton from './ShowingButton';
 import axios from 'axios';
 import State from './State.js'
 
+// Navigate from Taskbar or NewListing(send the new property) or BackButton
 function ManageListings(props) {
+    propertyData = props.route.params;
+    console.log("ManageListings starts: " + JSON.stringify(propertyData));
   const navigation = useNavigation();
   const [data, setData] = useState(null)
   const [errorMessage, setErrorMessage] =("")
@@ -30,6 +33,10 @@ function ManageListings(props) {
         console.log(error);
         setErrorMessage("Get user properties failed")
     }
+  } else {
+    if (propertyData) {
+        data.push(propertyData);
+    }
   }
 
   return (
@@ -44,12 +51,7 @@ function ManageListings(props) {
         <FlatList
           data={data}
           renderItem={({ item }) => (
-            <ShowingButton
-              address={item.address}
-              mlsNumber={item.mlsNumber}
-              image = {item.images?.find(x => true)}
-              goTo='PropertyDetails'
-            />
+            <ShowingButton propertyData={item} />
           )}
            keyExtractor={(item) => `${item._id}`}
         />

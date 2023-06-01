@@ -5,26 +5,39 @@ import { Text, View, Button, FlatList, StyleSheet, Image } from 'react-native';
 import { Card, FAB } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Taskbar from './Taskbar';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { RefreshControl, TouchableOpacity } from 'react-native-gesture-handler';
 import ShowingButton from './ShowingButton';
 import State from './State';
 import axios from 'axios';
 
+// Navigated from Login, NewAccount, TaskBar, BackButton
 function Home(props) {
-  console.log(State.getInstance().CurrentUser)
+
+  //console.log(State.getInstance().CurrentUser)
   const navigation = useNavigation();
   const [errorMessage, setErrorMessage] = useState("")
 
   const [data, setData] = useState(null);
-  console.log("Data is " + JSON.stringify(data));
-  if (data == null)
+
+  const [refreshing, setRefreshing] = useState(true);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
+  //console.log("Data is " + JSON.stringify(data));
+  if (refreshing)
   {
-    console.log("Data is null");
+    //console.log("Data is null");
     try {
         axios.get('http://127.0.0.1:5000/properties', {})
             .then((response)=>{
                 //console.log("Response: "+ JSON.stringify(response.data.properties));
                 setData(response.data.properties);
+                setRefreshing(false);
             });
     }
     catch (error) {
@@ -46,21 +59,18 @@ function Home(props) {
         {/* <ShowingButton address="123 Bond St." mlsNumber="43" goTo={FirstScreen} /> */}
 
         <FlatList
+          refreshing = {refreshing}
+          onRefresh={onRefresh}
           data={data}
           renderItem={({ item }) => (
-            <ShowingButton
-              address={item.address}
-              mlsNumber={item.mlsNumber}
-              image = {item.images?.find(x => true)}
-              goTo='PropertyDetails'
-            />
+            <ShowingButton propertyData={item}/>
           )}
-           keyExtractor={(item) => `${item.id}`}
+           keyExtractor={(item) => `${item._id}`}
         />
       </View>
 
       <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}>
-        <Taskbar />
+        <Taskbar/>
       </View>
 
       <View

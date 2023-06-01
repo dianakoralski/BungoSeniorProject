@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import State from './State';
+import axios from 'axios';
 
-const ShowingButton = ({ address, mlsNumber, goTo, image }) => {
+const ShowingButton = ({propertyData}) => {
     const navigation = useNavigation();
 
     return (
         <Pressable
             style={styles.container}
-            onPress={() => navigation.navigate(goTo)}
+            onPress={() => navigation.navigate('PropertyDetails', propertyData)}
         >
             <Image
-                source={{ uri: 'data:image/jpeg;base64,' + image}}
+                source={{ uri: 'data:image/jpeg;base64,' + propertyData.images?.find(x => true)}}
                 style={styles.image}
             />
             <View style={styles.infoContainer}>
-                <Text style={styles.address}>{address}</Text>
-                <Text style={styles.mlsNumber}>MLS #{mlsNumber}</Text>
+                <Text style={styles.address}>{propertyData.address}</Text>
+                <Text style={styles.mlsNumber}>MLS #{propertyData.mlsNumber}</Text>
             </View>
         </Pressable>
     );

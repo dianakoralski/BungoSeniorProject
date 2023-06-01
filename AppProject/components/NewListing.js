@@ -27,13 +27,15 @@ function NewListing(props) {
 
       // Create a new property record and sends it to the backend
       try {
-        const response = await axios.put('http://127.0.0.1:5000/properties',
-         { user_id: State.getInstance().CurrentUser['_id'],
+        const propertyData = { user_id: State.getInstance().CurrentUser['_id'],
             address: address, description: description, mlsNumber: mlsNumber,
-           date: date, images: selectedImages});
+           date: date, images: selectedImages};
+        const response = await axios.put('http://127.0.0.1:5000/properties',
+            propertyData
+         );
         // console.log(response.data);
         setErrorMessage("");
-        props.navigation.navigate('ManageListings');
+        props.navigation.navigate('ManageListings', propertyData);
       }
       catch (error) {
         console.log(JSON.stringify(error));
