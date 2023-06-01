@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Modal, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const Taskbar = ({ activeItem, onItemClick, onRefresh }) => {
+const Taskbar = () => {
   const navigation = useNavigation();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
@@ -10,13 +10,7 @@ const Taskbar = ({ activeItem, onItemClick, onRefresh }) => {
     setIsDropdownVisible(!isDropdownVisible);
   };
 
-  const handleMenuItemPress = (item) => {
-    // Handle the press of a dropdown menu item here
-    console.log('Dropdown menu item pressed:', item);
-    // You can close the dropdown modal here or perform any other action
-    setIsDropdownVisible(false);
-  };
-
+  //Will be implemented into real options in future development
   const dropdownData = [
     { id: '1', title: 'Option 1' },
     { id: '2', title: 'Option 2' },
@@ -26,26 +20,21 @@ const Taskbar = ({ activeItem, onItemClick, onRefresh }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={[
-          styles.item,
-          activeItem === 'Home' && styles.activeItem, // Apply different styles for the active item
-        ]}
+        style={styles.item}
         onPress={() => navigation.navigate('ManageListings')}
       >
         <Text style={styles.itemText}>Manage Listings</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={[
-          styles.item,
-          activeItem === 'About' && styles.activeItem, // Apply different styles for the active item
-        ]}
+        style={styles.item}
         onPress={() => navigation.navigate('Home', {email: ''})         
         }
       >
         <Text style={styles.itemText}>Home</Text>
       </TouchableOpacity>
 
+        {/* Placeholder for future development */}
       <TouchableOpacity style={styles.dropdownButton} onPress={handleDropdownPress}>
         <Text style={styles.dropdownButtonText}>Menu</Text>
       </TouchableOpacity>
@@ -88,9 +77,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 10,
-  },
-  activeItem: {
-    backgroundColor: '#123',
   },
   itemText: {
     fontSize: 16,

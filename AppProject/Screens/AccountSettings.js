@@ -1,32 +1,20 @@
-import { Link } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import LinkButton from '../components/LinkButton';
 import BackButton from '../components/BackButton';
 import { useNavigation } from '@react-navigation/native';
 
+//currently a hardcoded placeholder for the settings page
 
 function AccountSettings(props) {
-    // const options = [
-    //     { id: 1, label: 'Account', goTo: 'Account' },
-    //     { id: 2, label: 'Settings', goTo: 'Settings' },
-    //     { id: 3, label: 'Notifications', goTo: 'Notifications' },
-    //     { id: 4, label: 'Storage and Data', goTo: 'StorageAndData' },
-    //     { id: 5, label: 'Help', goTo: 'Help' },
-    //     // Add more options as needed
-    // ];
+    //Will be implemented in future
     const options = [
         { id: 1, label: 'Account', goTo: 'Login' },
         { id: 2, label: 'Settings', goTo: 'Login' },
         { id: 3, label: 'Notifications', goTo: 'Login' },
         { id: 4, label: 'Storage and Data', goTo: 'Login' },
         { id: 5, label: 'Help', goTo: 'Login' },
-        // Add more options as needed
     ];
-
-    const renderOption = ({ item }) => (
-        <Text style={styles.option}>{item.label}</Text>
-    );
 
     const navigation = useNavigation()
 
@@ -39,17 +27,12 @@ function AccountSettings(props) {
             <Text style={styles.title}>
                 Account Settings
             </Text>
-            {/* <Text style={styles.name}>
-                Oscar Liu
-            </Text>
-            <Text style={styles.descr}>
-                Realtor At San Luis Obispo Realty
-            </Text> */}
             <View style={styles.profileContainer}>
                 <Image
                     source={require('../assets/avatar-1577909.png')} // Replace with the actual image source
                     style={styles.profileImage}
                 />
+                {/* Replace following info with user data */}
                 <View style={styles.textContainer}>
                     <Text style={styles.name}>Oscar Liu</Text>
                     <Text style={styles.descr}>

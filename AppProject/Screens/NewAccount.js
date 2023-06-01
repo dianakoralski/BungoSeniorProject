@@ -23,6 +23,8 @@ function NewAccount(props) {
     const [license, setLicense] =useState("")
     const [jurisdiction, setJurisdiction] = useState("")
 
+  //Create a new user after validation with realtor API and DB requirements
+
     const handleSubmit = async (event) => {
       // Using external API to validate the license exists and matches the name
       // API documentation: https://www.arello.com/Developers.cfm
@@ -40,11 +42,9 @@ function NewAccount(props) {
          {
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
          });
-        console.log(response.data);
         setErrorMessage("Success");
         results = response.data["results"];
         
-        //console.log("Found records: "+ JSON.stringify(results))
         //check if license is found
        if (results.length != 1)
        {
@@ -75,15 +75,12 @@ function NewAccount(props) {
          { name: name, email: email, password: password,
            jursidiction: jurisdiction,
            license: license});
-        console.log(response.data);
         setErrorMessage("");
         user = response.data
         State.getInstance().CurrentUser = user;
         props.navigation.navigate('Home', {});
       }
       catch (error) {
-        console.log(error.response?.status);
-        console.log(error.response?.data);
         setErrorMessage(error.response?.data["error creating new user"])
       }
     }
@@ -143,15 +140,15 @@ function NewAccount(props) {
   <Text style = {styles.txtStyle}>I am looking to:</Text>
 
   <CheckBox
-                onPress={() => setListJob(!listJob)}
-                title="Find realtors to do showings for me"
-                isChecked={listJob}
-              />
-              <CheckBox
-                onPress={() => setFindJob(!findJob)}
-                title="Do showings for other realtors"
-                isChecked={findJob}
-              />
+    onPress={() => setListJob(!listJob)}
+    title="Find realtors to do showings for me"
+    isChecked={listJob}
+  />
+  <CheckBox
+    onPress={() => setFindJob(!findJob)}
+    title="Do showings for other realtors"
+    isChecked={findJob}
+  />
 
     <Button 
     style= {{margin: 10}}
@@ -182,27 +179,6 @@ const styles =StyleSheet.create({
       marginLeft: 10,
       paddingTop:10
     },
-    roundButton1: {
-      paddingLeft: 15,
-      fontSize: 30,
-      width: 100,
-      height: 100,
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 100,
-      backgroundColor: 'orange',
-      marginLeft: 130,
-      marginTop:10
-    },
-      profilePhotoContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      profilePhoto: {
-        width: 150,
-        height: 150,
-        borderRadius: 75,
-      },
     });
   
 

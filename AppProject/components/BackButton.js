@@ -16,9 +16,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop:10
   },
-  icon: {
-    color: 'white',
-  },
 });
 
 export default BackButton;

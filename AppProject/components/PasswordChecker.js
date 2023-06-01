@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet} from 'react-native';
 import {TextInput} from 'react-native-paper';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const PasswordChecker = (props) => {
   const [password, setPassword] = useState('');

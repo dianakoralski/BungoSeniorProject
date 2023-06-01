@@ -19,6 +19,8 @@ const ShowingButton = ({propertyData}) => {
             <View style={styles.infoContainer}>
                 <Text style={styles.address}>{propertyData.address}</Text>
                 <Text style={styles.mlsNumber}>MLS #{propertyData.mlsNumber}</Text>
+                <Text>Wage {propertyData.wage}</Text>
+
             </View>
         </Pressable>
     );

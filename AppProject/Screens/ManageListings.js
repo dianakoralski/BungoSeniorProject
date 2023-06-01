@@ -1,8 +1,7 @@
-import { NavigationContainer } from '@react-navigation/native';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Text, View, Button, FlatList, StyleSheet, Image } from 'react-native';
-import { Card, FAB } from 'react-native-paper';
+import { Text, View, FlatList, StyleSheet, Image } from 'react-native';
+import { FAB } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Taskbar from '../components/Taskbar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -13,19 +12,16 @@ import State from '../components/State.js'
 // Navigate from Taskbar or NewListing(send the new property) or BackButton
 function ManageListings(props) {
     propertyData = props.route.params;
-    console.log("ManageListings starts: " + JSON.stringify(propertyData));
   const navigation = useNavigation();
   const [data, setData] = useState(null)
   const [errorMessage, setErrorMessage] =("")
-  //var data = [
-  //  { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-  //];
+
+  // List all properties that belong to the current user
   if (data == null)
   {
     try {
         axios.get('http://127.0.0.1:5000/properties',{params: {user_id: State.getInstance().CurrentUser['_id']}})
             .then((response)=>{
-               // console.log("Response: "+ JSON.stringify(response.data.properties));
                 setData(response.data.properties);
             });
     }
@@ -90,6 +86,7 @@ function ManageListings(props) {
 
 
 const styles = StyleSheet.create({
+  //Might change UI into cards to better match Figma model
   cardStyle: {
     marginTop: 10,
     marginLeft: 10,

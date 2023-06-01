@@ -1,24 +1,17 @@
-import email
 import re
-#from flask_cors import CORS
-from flask import Flask
-from flask import request
-from flask import jsonify
-import json
-
-from turtle import update
+from flask import Flask, request, jsonify
 from User import User
 from Property import Property
 
-#import os
-
 app = Flask(__name__)
-#CORS(app)
 
+#landing page for backend testing
 @app.route('/')
 def hello_world():
    return 'Hello, DIANA2222ç!'
 
+# user data manipluation for creating accounts 
+# (and deleting users - to be implemented in front end)
 @app.route('/users', methods=['GET', 'PUT', 'PATCH', 'DELETE'])
 def get_users():
     if request.method == 'GET':
@@ -33,8 +26,6 @@ def get_users():
         userToAdd = request.get_json()
         if not password_checker(userToAdd["password"]):
             return jsonify({"error": "Invalid Password"}), 400
-
-        #TODO: Probably put all this in a function (easier for testing and reading)
         newUser = User(**userToAdd)
         newUser.save()
         resp = jsonify(newUser), 201
@@ -48,8 +39,6 @@ def get_users():
 
 # STAND IN login functionality
 # - be able to accept email and password and verify if there is a user that matches both
-# for actual implementation using Cognito so wouldn't be exposing password like this (just for testing)
-# @app.route('/login/<email>/<password>', methods=['GET'])
 @app.route('/login', methods=['POST'])
 def authenticate_user():
     if request.method == 'POST':
@@ -61,18 +50,8 @@ def authenticate_user():
                 return email_user
     return jsonify({"error": "Login failed"}), 400
 
-# @app.route('/filter/<city>/<state>/<country>/<services>/<coordinates>/<radius>/<gender>', methods=['GET'])
-# @app.route('/filter', methods=['GET'])
-# def filter_providers():
-#     if request.method == 'GET':
-#         # TODO: figure out how we want to pass parameters
-#         city = request.args.get('city', default=None)
-#         state = request.args.get('state', default=None)
-#         country = request.args.get('country', default=None)
-#         users = User().filter_users(city, state, country, services, coordinates, radius, gender)
-#         return users
-#     return []
-
+# manipulate properties' data - mostly used for creating new listings and 
+# fetching data from each property
 @app.route('/properties', methods=['GET', 'PUT', 'PATCH', 'DELETE'])
 def get_properties():
     if request.method == 'GET':
@@ -99,19 +78,6 @@ def get_properties():
             property_to_delete = Property(**property_info[0])
             return property_to_delete.remove()
         return jsonify({"error": "Missing Property Id"}), 400
-
-@app.route('/test', methods=['GET'])
-def testing():
-    if request.method == 'GET':
-        email_user = User().filter_users("San Luis Obispo", "California", "USA", None, [-120, 36], 5000000, None)
-        return email_user
-
-@app.route('/add', methods=['GET'])
-def add_user():
-    posts = []
-    for post in User().find_all():
-        posts.append(post)
-    return jsonify(posts)
 
  #check for existing email
 def check_email_exists(user_email):
@@ -141,28 +107,6 @@ def password_checker(password):
         return False
     # If all the conditions are satisfied, the password is valid
     return True
-
-# Test the password checker
-# password = input("Enter your password: ")
-# if password_checker(password):
-#     print("Valid password")
-# else:
-#     print("Invalid password")
-
-
-
-# check_email("user4@gmail.com")
-
-# def update_user(user : User):
-#     collection.replace_one({"username" : user.get_username()}, vars(user))  #updates values
- 
-# new_user.name = "Samuel"
-# update_user(new_user)
-
-# def delete_user_by_username(username):
-#     collection.delete_one({"username" : username})
-
-#delete_user_by_username("566 slo")
 
 if __name__ == "__main__":
     Flask.run(app)
