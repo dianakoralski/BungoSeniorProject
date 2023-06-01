@@ -16,6 +16,8 @@ function NewListing(props) {
     const [address, setAddress] = useState("")
     const [mlsNumber, setMLSNumber] =useState("")
     const [date, setDate] =useState("")
+    const [time, setTime] =useState("")
+    const [wage, setWage] =useState("")
     const [selectedImages, setSelectedImages] = useState([]);
     function handleState(newValue) {
         setSelectedImages(newValue);
@@ -71,6 +73,13 @@ function NewListing(props) {
       onChangeText={text =>setDescription(text)}
       />
 
+<Text style = {styles.txtStyle}>Wage Offered:</Text>
+    <TextInput style = {styles.inputStyle}
+      value={wage}
+      mode = 'outlined'
+      onChangeText={text =>setWage(text)}
+    />
+
 <Text style = {styles.txtStyle}>MLS #:</Text>
       <TextInput style = {styles.inputStyle}
       small={true}
@@ -79,11 +88,18 @@ function NewListing(props) {
       onChangeText={text =>setMLSNumber(text)}
       />
 
-      <Text style = {styles.txtStyle}>Date:</Text>
+      <Text style = {styles.txtStyle}>Date of Showing:</Text>
     <TextInput style = {styles.inputStyle}
       value={date}
       mode = 'outlined'
       onChangeText={text =>setDate(text)}
+    />
+
+<Text style = {styles.txtStyle}>Time of Showing:</Text>
+    <TextInput style = {styles.inputStyle}
+      value={time}
+      mode = 'outlined'
+      onChangeText={text =>setTime(text)}
     />
 
     <Button 

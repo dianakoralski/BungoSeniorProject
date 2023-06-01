@@ -34,15 +34,6 @@ function Home(props) {
     }
   }
 
-  const renderData = (item) => {
-    return (
-      <Card style={styles.cardStyle}>
-        <Text style={{ fontSize: 20 }}>{item.title}</Text>
-        <Text>{item.body}</Text>
-      </Card>
-    );
-  };
-
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.textBox}>
@@ -64,7 +55,7 @@ function Home(props) {
               goTo='PropertyDetails'
             />
           )}
-          keyExtractor={(item) => `${item.id}`}
+           keyExtractor={(item) => `${item.id}`}
         />
       </View>
 

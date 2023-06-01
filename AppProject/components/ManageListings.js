@@ -31,16 +31,6 @@ function ManageListings(props) {
         setErrorMessage("Get user properties failed")
     }
   }
-  
-
-  const renderData = (item) => {
-    return (
-      <Card style={styles.cardStyle}>
-        <Text style={{ fontSize: 20 }}>{item.title}</Text>
-        <Text>{item.body}</Text>
-      </Card>
-    );
-  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -49,6 +39,7 @@ function ManageListings(props) {
       </View>
 
       <View style={{ flex: 1 }}>
+        <Text style = {{alignSelf: 'center' ,fontSize: 32, fontWeight: 'bold'}}>My Listings</Text>
     
         <FlatList
           data={data}
@@ -56,10 +47,11 @@ function ManageListings(props) {
             <ShowingButton
               address={item.address}
               mlsNumber={item.mlsNumber}
-              goTo='Home'
+              image = {item.images?.find(x => true)}
+              goTo='PropertyDetails'
             />
           )}
-          keyExtractor={(item) => `${item._id}`}
+           keyExtractor={(item) => `${item._id}`}
         />
       </View>
 
