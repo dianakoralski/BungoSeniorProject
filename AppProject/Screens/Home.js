@@ -4,38 +4,46 @@ import { useNavigation } from '@react-navigation/native';
 import { Text, View, Button, FlatList, StyleSheet, Image } from 'react-native';
 import { Card, FAB } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Taskbar from './Taskbar';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import ShowingButton from './ShowingButton';
+import Taskbar from '../components/Taskbar';
+import { RefreshControl, TouchableOpacity } from 'react-native-gesture-handler';
+import ShowingButton from '../components/ShowingButton';
+import State from '../components/State';
 import axios from 'axios';
-import State from './State.js'
 
-// Navigate from Taskbar or NewListing(send the new property) or BackButton
-function ManageListings(props) {
-    propertyData = props.route.params;
-    console.log("ManageListings starts: " + JSON.stringify(propertyData));
+// Navigated from Login, NewAccount, TaskBar, BackButton
+function Home(props) {
+
+  //console.log(State.getInstance().CurrentUser)
   const navigation = useNavigation();
-  const [data, setData] = useState(null)
-  const [errorMessage, setErrorMessage] =("")
-  //var data = [
-  //  { address: '123 Bond St.', mlsNumber: '43', goTo: 'FirstScreen' },
-  //];
-  if (data == null)
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const [data, setData] = useState(null);
+
+  const [refreshing, setRefreshing] = useState(true);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
+  //console.log("Data is " + JSON.stringify(data));
+  if (refreshing)
   {
+    //console.log("Data is null");
     try {
-        axios.get('http://127.0.0.1:5000/properties',{params: {user_id: State.getInstance().CurrentUser['_id']}})
+        axios.get('http://127.0.0.1:5000/properties', {})
             .then((response)=>{
-               // console.log("Response: "+ JSON.stringify(response.data.properties));
+                //console.log("Response: "+ JSON.stringify(response.data.properties));
                 setData(response.data.properties);
+                setRefreshing(false);
             });
     }
     catch (error) {
-        console.log(error);
-        setErrorMessage("Get user properties failed")
-    }
-  } else {
-    if (propertyData) {
-        data.push(propertyData);
+        console.log(JSON.stringify(error));
+        setErrorMessage("Get user properties failed");
+        setData([]);
     }
   }
 
@@ -46,28 +54,23 @@ function ManageListings(props) {
       </View>
 
       <View style={{ flex: 1 }}>
-        <Text style = {{alignSelf: 'center' ,fontSize: 32, fontWeight: 'bold'}}>My Listings</Text>
-    
+        {props.route.params?.email?.length > 0 && <Text style = {{fontSize: 30, textAlign: 'center'} }>Welcome back {State.getInstance().CurrentUser.email}!</Text>}
+        {/* change to name, not email */}
+        {/* <ShowingButton address="123 Bond St." mlsNumber="43" goTo={FirstScreen} /> */}
+
         <FlatList
+          refreshing = {refreshing}
+          onRefresh={onRefresh}
           data={data}
           renderItem={({ item }) => (
-            <ShowingButton propertyData={item} />
+            <ShowingButton propertyData={item}/>
           )}
            keyExtractor={(item) => `${item._id}`}
         />
       </View>
 
-      {/* Button to add new lisiting */}
-      <FAB
-        style = {styles.fab}
-        small = {false}
-        icon = "plus"
-        theme={{colors:{accent:"green"}}}
-        onPress = {() => navigation.navigate('NewListing')}
-      />
-
       <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}>
-        <Taskbar />
+        <Taskbar/>
       </View>
 
       <View
@@ -88,7 +91,6 @@ function ManageListings(props) {
   );
 }
 
-
 const styles = StyleSheet.create({
   cardStyle: {
     marginTop: 10,
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     margin: 16,
     right: 0,
-    bottom: 50
+    bottom: 70
   },
   textBox: {
     marginTop: 20,
@@ -120,8 +122,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ManageListings;
-
-      
-
-
+export default Home;

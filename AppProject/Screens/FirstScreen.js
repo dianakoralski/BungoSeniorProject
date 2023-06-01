@@ -1,7 +1,7 @@
 import {Text, View, StyleSheet, Image} from 'react-native';
 import {FAB} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import LinkButton from './LinkButton.js';
+import LinkButton from '../components/LinkButton.js';
 
 function FirstScreen(props) {
   const navigation = useNavigation();

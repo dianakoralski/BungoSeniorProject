@@ -2,10 +2,10 @@ import React, {useState} from 'react'
 import {ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { TextInput, Button, FAB } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native';
-import BackButton from './BackButton.js';
-import PickPhotos from './PickPhotos.js';
+import BackButton from '../components/BackButton.js';
+import PickPhotos from '../components/PickPhotos.js';
 import axios from 'axios';
-import State from './State.js'
+import State from '../components/State.js'
 
 function NewListing(props) {
 

@@ -2,11 +2,11 @@ import React, {useState} from 'react'
 import {ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { TextInput, Button, FAB } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native';
-import BackButton from './BackButton.js';
-import PasswordChecker from './PasswordChecker.js'
-import CheckBox from './CheckBox.js';
-import RoundButton from './RoundButton.js';
-import State from './State.js';
+import BackButton from '../components/BackButton.js';
+import PasswordChecker from '../components/PasswordChecker.js'
+import CheckBox from '../components/CheckBox.js';
+import RoundButton from '../components/RoundButton.js';
+import State from '../components/State.js';
 import axios from 'axios';
 
 function NewAccount(props) {

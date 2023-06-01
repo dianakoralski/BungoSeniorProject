@@ -1,8 +1,8 @@
 import { Link } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
-import LinkButton from './LinkButton';
-import BackButton from './BackButton';
+import LinkButton from '../components/LinkButton';
+import BackButton from '../components/BackButton';
 import { useNavigation } from '@react-navigation/native';
 
 

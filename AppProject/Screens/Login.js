@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import BackButton from './BackButton.js';
-import LinkButton from './LinkButton.js';
+import BackButton from '../components/BackButton.js';
+import LinkButton from '../components/LinkButton.js';
 import axios from 'axios';
-import State from './State.js';
+import State from '../components/State.js';
 
 function Login(props) {
   
