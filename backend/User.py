@@ -5,6 +5,7 @@ import os
 # import dotenv to hide Atlas Credentials
 from dotenv import load_dotenv
 import certifi
+import re
 
 class User(Model):
     def __init__(self, **kwargs):
@@ -33,7 +34,7 @@ class User(Model):
         return make_id_strings(users)
 
     def find_by_email(self, email):
-        users = list(self.collection.find({"email": email}))
+        users = list(self.collection.find({"email": re.compile(email, re.IGNORECASE)}))
         return make_id_strings(users)
 
 # helper which turns the object ids into strings for readability

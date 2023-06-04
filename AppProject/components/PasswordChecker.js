@@ -4,6 +4,7 @@ import {TextInput} from 'react-native-paper';
 
 const PasswordChecker = (props) => {
   const [password, setPassword] = useState('');
+  const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
   const hasLowerCase = /[a-z]/.test(password);
   const hasUpperCase = /[A-Z]/.test(password);
@@ -20,7 +21,15 @@ const PasswordChecker = (props) => {
       value={password}
       mode = 'outlined'
       theme = {{roundness:20}}
-      secureTextEntry
+      right={
+        <TextInput.Icon
+          icon={isPasswordSecure ? "eye-off" : "eye"}
+          size={28}
+          color="black"
+          onPress={() => { isPasswordSecure ? setIsPasswordSecure(false) : setIsPasswordSecure(true) }}
+        />
+      }
+      secureTextEntry={isPasswordSecure}
       onChangeText={(text) => {
             setPassword(text);
             props.setPasswordCallback(text);
@@ -46,7 +55,8 @@ const styles =StyleSheet.create({
     inputStyle: {
         width: 350,
         height: 30,
-        paddingBottom: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
         marginLeft:10
     },
     txtStyle:{

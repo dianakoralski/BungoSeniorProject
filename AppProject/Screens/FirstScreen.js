@@ -11,7 +11,7 @@ function FirstScreen(props) {
       <View style ={{flex:1, backgroundColor: "#191970"}}>
         <Image source={require('./bungotext.png')} style={{width: 300, height: 100, marginTop: 100, marginLeft:30}}/>
         <Text style={{width: 300, height: 100, marginTop: 10, marginLeft:30, color: "white", textAlign: "center", fontSize: 20}}>
-          Leading Real Estate Forward, One Open House at a Time
+          Leading Real Estate Forward, One Showing at a Time
         </Text>
       
         <FAB

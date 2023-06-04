@@ -13,6 +13,7 @@ class Property(Model):
 
     load_dotenv()  # take environment variables from .env.
 
+    # Connect to database
     MONGO_USER =os.environ['MONGO_USER']
     MONGO_PWD =os.environ['MONGO_PWD']
     MONGO_CLUSTER =os.environ['MONGO_CLUSTER']
@@ -28,7 +29,6 @@ class Property(Model):
 
     def find_all(self):
         properties = list(self.collection.find())
-        print(f'properties:  {properties}')
         return make_id_strings(properties)
 
     def find_by_id(self, prop_id):

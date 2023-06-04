@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import BackButton from '../components/BackButton.js';
 import axios from 'axios';
 import State from '../components/State.js';
-import LinkButton from '../components/LinkButton.js';
 
 function Login(props) {
   
@@ -14,12 +13,14 @@ function Login(props) {
   const [errorMessage, setErrorMessage] = useState("")
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+
 
   //Fetch user information to verify login and store to use in-app
   const handleSubmit = async () => {
     try {
       const response = await axios.post('http://127.0.0.1:5000/login', {email: email, password: password});
-      setErrorMessage("Success");
+      setErrorMessage("");
       user = response.data[0];
       State.getInstance().CurrentUser = user;
       State.getInstance().DisplayWelcomeUser = true;
@@ -38,7 +39,7 @@ function Login(props) {
         <BackButton onPress={() => navigation.goBack()} />
         <Image source={require('./bungotext.png')} style={{ width: 300, height: 100, marginLeft:30, marginTop:10}} />
       </View>
-      <Text style = {styles.txtStyle}>{errorMessage}</Text>
+      <Text style = {{color: 'red', marginLeft: '3%'}}>{errorMessage}</Text>
       <Text style={styles.promptStyle}>Email:</Text>
       <TextInput
         style={styles.inputStyle}
@@ -55,6 +56,15 @@ function Login(props) {
         value={password}
         mode="outlined"
         theme={{ roundness: 20 }}
+        right={
+          <TextInput.Icon
+            icon={isPasswordSecure ? "eye-off" : "eye"}
+            size={28}
+            color="black"
+            onPress={() => { isPasswordSecure ? setIsPasswordSecure(false) : setIsPasswordSecure(true) }}
+          />
+        }
+        secureTextEntry={isPasswordSecure}
         onChangeText={(text) => setPassword(text)}
       />
 
